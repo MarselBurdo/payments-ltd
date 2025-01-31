@@ -1,28 +1,29 @@
-export const authProvider = {
-    login: async ({ username }) => {
-        // Симуляция авторизации
-        const roles = {
-            client: 'client',
-            processor: 'processor',
-        };
+import {fakeData} from "@/constants/fakeData";
 
-        // Простая проверка роли на основе имени пользователя
-        const role = roles[username.toLowerCase()];
-        if (!role) {
-            throw new Error('Неверные учетные данные');
+export const authProvider = {
+    login: async ({ username, password }: { username: string; password: string, }) => {
+        const user = fakeData.users.find(
+            (u) => u.email === username && u.password === password
+        );
+
+        if (!user) {
+            return Promise.reject(new Error("Invalid credentials"));
         }
 
-        // Сохраняем данные о пользователе (например, роль)
-        localStorage.setItem('role', role);
-        return Promise.resolve();
+        localStorage.setItem("user", JSON.stringify(user));
+        return Promise.resolve(user);
     },
+
     logout: async () => {
         localStorage.removeItem('role');
+       localStorage.removeItem("user");
         return Promise.resolve();
     },
     checkAuth: async () => {
-        const role = localStorage.getItem('role');
-        return role ? Promise.resolve() : Promise.reject();
+        // const role = localStorage.getItem('role');
+        // return role ? Promise.resolve() : Promise.reject();
+        const user = localStorage.getItem("user");
+        return user ? Promise.resolve() : Promise.reject();
     },
     getIdentity: async () => {
         const role = localStorage.getItem('role');

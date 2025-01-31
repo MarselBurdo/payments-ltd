@@ -649,5 +649,19 @@ export const fakeData: { [key: string]: any } = {
             {id: 'client1', name: 'Client 1', email: 'client1@example.com'},
             {id: 'client2', name: 'Client 2', email: 'client2@example.com'},
         ],
+    users: [
+        {
+            id: 1,
+            email: "test@example.com",
+            role: "client",
+            password: "demo",
+        },
+        {
+            id: 2,
+            email: "processor@example.com",
+            role: "processor",
+            password: "demo",
+        },
+    ],
     }
 ;

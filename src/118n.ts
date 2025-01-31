@@ -1,76 +1,58 @@
-import i18n from "i18next";
-import {initReactI18next} from "react-i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
-import HttpBackend from "i18next-http-backend";
+import polyglotI18nProvider from 'ra-i18n-polyglot';
+import ru from 'ra-language-russian';
+import en from 'ra-language-english';
+import {resolveBrowserLocale} from "ra-core";
 
-i18n
-    .use(HttpBackend)
-    .use(LanguageDetector)
-    .use(initReactI18next)
-    .init({
-        fallbackLng: "en",
-        debug: true,
-        lng: localStorage.getItem("i18nextLng") || "en",
-        interpolation: {
-            escapeValue: false,
-        },
+const translations ={
+    en: {
+        ...en,
         resources: {
-            en: {
-                translation: {
-                    ra: {
-                        action: {
-                            create: 'Create'
-                        }
-                    },
-                    resources: {
-                        payments: {
-                            name: "Payments",
-                            fields: {
-                                name: "Name",
-                                amount: "Amount",
-                                status: "Status", // Добавлено
-                                description: "Description", // Добавлено
-                            },
-                        },
-                        clients: {
-                            name: "Clients",
-                            fields: {
-                                name: "Name",
-                                amount: "Amount",
-                            },
-                        },
-                    },
+            payments: {
+                name: "Payments",
+                fields: {
+                    name: "Name",
+                    amount: "Amount",
+                    status: "Status",
+                    description: "Description",
                 },
             },
-            ru: {
-                translation: {
-                    ra: {
-                        action: {
-                            // create: 'Создать'
-                        }
-                    },
-                    resources: {
-                        payments: {
-                            name: "Платежи",
-                            fields: {
-                                name: 'Имя',
-                                amount: "Сумма",
-                                status: "Статус", // Добавлено
-                                description: "Описание", // Добавлено
-                            },
-                        },
-                        clients: {
-                            name: "Клиенты"
-                        }
-                    },
+            clients: {
+                name: "Clients",
+                fields: {
+                    name: "Name",
+                    amount: "Amount",
                 },
             },
         },
-        detection: {
-            order: ["localStorage", "cookie", "navigator"], // Источники определения языка
-            caches: ["localStorage", "cookie"], // Кеширование выбора
+    },
+    ru: {
+        ...ru,
+        resources: {
+            payments: {
+                name: "Платежи",
+                fields: {
+                    name: "Имя",
+                    amount: "Сумма",
+                    status: "Статус",
+                    description: "Описание",
+                },
+            },
+            clients: {
+                name: "Клиенты",
+                fields: {
+                    id:'Идентификатор',
+                    name: "Имя",
+                    amount: "Сумма",
+                    status: "Статус",
+                    description: "Описание",
+                },
+            },
         },
-    });
+    },
+};
 
-
-export default i18n;
+export const i18nProvider = polyglotI18nProvider(
+    locale => translations[locale] ? translations[locale] : translations.en,
+    resolveBrowserLocale('en', { fullLocale: true }),
+    [{ locale: 'en', name: 'English' }, { locale: 'ru', name: 'Russian' }],
+);
