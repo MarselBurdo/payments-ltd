@@ -21,6 +21,7 @@ const translations ={
                 fields: {
                     name: "Name",
                     amount: "Amount",
+                    inn:'INN'
                 },
             },
         },
@@ -45,6 +46,7 @@ const translations ={
                     amount: "Сумма",
                     status: "Статус",
                     description: "Описание",
+                    inn: "ИНН",
                 },
             },
         },

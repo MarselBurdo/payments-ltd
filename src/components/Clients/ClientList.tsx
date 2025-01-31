@@ -18,20 +18,20 @@ const ListActions = () => (
     </TopToolbar>
 );
 
-const paymentsFilters = [
+const clientsFilters = [
     <SearchInput source="q" alwaysOn/>,
 ];
 
-export function PaymentsList() {
-    return <List resource={'payments'} pagination={<Pagination rowsPerPageOptions={[10, 25, 50, 100]}/>} perPage={10}
-                 actions={<ListActions/>} filters={paymentsFilters}>
+export function ClientList() {
+    return <List resource={'clients'} pagination={<Pagination rowsPerPageOptions={[10, 25, 50, 100]}/>} perPage={10}
+                 actions={<ListActions/>} filters={clientsFilters}>
 
         <DatagridConfigurable>
 
             <TextField source="name"/>
-            <TextField source="amount"/>
-            <TextField source="status"/>
-            <TextField source="description"/>
+            <TextField source="inn"/>
+            <TextField source="id"/>
+            <TextField source="email"/>
         </DatagridConfigurable>
 
     </List>

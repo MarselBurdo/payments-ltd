@@ -6,9 +6,19 @@ const fakeDataProvider: DataProvider = {
   getList: (resource, params) => {
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort || { field: "id", order: "ASC" };
+    const { q } = params.filter || {};
 
     let data = [...fakeData[resource]];
-
+    // Фильтрация по поисковому запросу
+    if (q) {
+      const lowerCaseQuery = q.toLowerCase();
+      data = data.filter((item) =>
+          Object.values(item).some(
+              (value) =>
+                  typeof value === "string" && value.toLowerCase().includes(lowerCaseQuery)
+          )
+      );
+    }
     // Сортировка данных
     data.sort((a, b) => {
       if (a[field] < b[field]) return order === "ASC" ? -1 : 1;
@@ -31,7 +41,7 @@ const fakeDataProvider: DataProvider = {
     return Promise.resolve({ data: record });
   },
   create: (resource, params) => {
-    const newRecord = { id: Date.now(), ...params.data };
+    const newRecord = { id: Date.now(), ...params.data, status:'Pending' };
     fakeData[resource].push(newRecord);
     return Promise.resolve({ data: newRecord });
   },
