@@ -1,28 +1,29 @@
-import { fakeData } from '@/constants/fakeData';
 import { DataProvider } from 'react-admin';
 
+import { fakeData } from '@/constants/fakeData';
 
 const fakeDataProvider: DataProvider = {
   getList: (resource, params) => {
     const { page, perPage } = params.pagination;
-    const { field, order } = params.sort || { field: "id", order: "ASC" };
+    const { field, order } = params.sort || { field: 'id', order: 'ASC' };
     const { q } = params.filter || {};
 
     let data = [...fakeData[resource]];
     // Фильтрация по поисковому запросу
     if (q) {
       const lowerCaseQuery = q.toLowerCase();
-      data = data.filter((item) =>
-          Object.values(item).some(
-              (value) =>
-                  typeof value === "string" && value.toLowerCase().includes(lowerCaseQuery)
-          )
+      data = data.filter(item =>
+        Object.values(item).some(
+          value =>
+            typeof value === 'string' &&
+            value.toLowerCase().includes(lowerCaseQuery)
+        )
       );
     }
     // Сортировка данных
     data.sort((a, b) => {
-      if (a[field] < b[field]) return order === "ASC" ? -1 : 1;
-      if (a[field] > b[field]) return order === "ASC" ? 1 : -1;
+      if (a[field] < b[field]) return order === 'ASC' ? -1 : 1;
+      if (a[field] > b[field]) return order === 'ASC' ? 1 : -1;
       return 0;
     });
 
@@ -37,21 +38,26 @@ const fakeDataProvider: DataProvider = {
     });
   },
   getOne: (resource, params) => {
-    const record = fakeData[resource].find((item) => item.id === params.id);
+    const record = fakeData[resource].find(item => item.id === params.id);
     return Promise.resolve({ data: record });
   },
   create: (resource, params) => {
-    const newRecord = { id: Date.now(), ...params.data, status:'Pending' };
+    const newRecord = { id: Date.now(), ...params.data, status: 'Pending' };
     fakeData[resource].push(newRecord);
     return Promise.resolve({ data: newRecord });
   },
   update: (resource, params) => {
-    const index = fakeData[resource].findIndex((item) => item.id === params.id);
-    fakeData[resource][index] = { ...fakeData[resource][index], ...params.data };
+    const index = fakeData[resource].findIndex(item => item.id === params.id);
+    fakeData[resource][index] = {
+      ...fakeData[resource][index],
+      ...params.data,
+    };
     return Promise.resolve({ data: fakeData[resource][index] });
   },
   delete: (resource, params) => {
-    fakeData[resource] = fakeData[resource].filter((item) => item.id !== params.id);
+    fakeData[resource] = fakeData[resource].filter(
+      item => item.id !== params.id
+    );
     return Promise.resolve({ data: params.previousData });
   },
 };

@@ -1,7 +1,8 @@
-"use client";
-import dynamic from "next/dynamic";
+'use client';
 
-const AdminApp = dynamic(() => import("@/components/Main"), { ssr: false });
+import dynamic from 'next/dynamic';
+
+const AdminApp = dynamic(() => import('@/components/Main'), { ssr: false });
 
 const Main = () => <AdminApp />;
 
