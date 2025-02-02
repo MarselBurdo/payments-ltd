@@ -12,28 +12,28 @@ import {
 
 const ListActions = () => (
   <TopToolbar>
-    <SelectColumnsButton preferenceKey={'payments.dataGrid'} />
+    <SelectColumnsButton preferenceKey={'clients.dataGrid'} />
     <CreateButton />
     <ExportButton />
   </TopToolbar>
 );
 
-const paymentsFilters = [<SearchInput source="q" alwaysOn />];
+const clientsFilters = [<SearchInput source="q" alwaysOn />];
 
-export function PaymentsList() {
+export function ClientsList() {
   return (
     <List
-      resource={'payments'}
+      resource={'clients'}
       pagination={<Pagination rowsPerPageOptions={[10, 25, 50, 100]} />}
       perPage={10}
       actions={<ListActions />}
-      filters={paymentsFilters}
+      filters={clientsFilters}
     >
-      <DatagridConfigurable preferenceKey={'payments.dataGrid'}>
+      <DatagridConfigurable preferenceKey={'clients.dataGrid'}>
         <TextField source="name" />
-        <TextField source="amount" />
-        <TextField source="status" />
-        <TextField source="description" />
+        <TextField source="inn" />
+        <TextField source="id" />
+        <TextField source="email" />
       </DatagridConfigurable>
     </List>
   );

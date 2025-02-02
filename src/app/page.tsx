@@ -1,5 +1,6 @@
-import AdminWrapper from "@/components";
-import { NextPage } from "next";
+import { NextPage } from 'next';
+
+import AdminWrapper from '@/components';
 
 const Home: NextPage = () => <AdminWrapper />;
 

@@ -1,17 +1,19 @@
-import {ReactNode} from "react";
-import type { Metadata } from "next";
-import { Inter,  } from "next/font/google";
-import "./globals.css";
+import { ReactNode } from 'react';
+
+import { Inter } from 'next/font/google';
+
+import type { Metadata } from 'next';
+
+import './globals.css';
 
 const interSans = Inter({
-  variable: "--font-inter-sans",
-  subsets: ["latin"],
+  variable: '--font-inter-sans',
+  subsets: ['latin'],
 });
 
-
 export const metadata: Metadata = {
-  title: "Payments Ltd",
-  description: "Save payments",
+  title: 'Payments Ltd',
+  description: 'Save payments',
 };
 
 export default function RootLayout({
@@ -21,9 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${interSans.variable}`}>
-        {children}
-      </body>
+      <body className={`${interSans.variable}`}>{children}</body>
     </html>
   );
 }

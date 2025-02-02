@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier ./src/* --write",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "i18next": "^24.2.2",
@@ -23,11 +25,13 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
+    "prettier": "^3.4.2",
     "typescript": "^5"
   }
 }
