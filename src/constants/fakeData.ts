@@ -1,4 +1,32 @@
-export const fakeData: { [key: string]: any } = {
+interface Payment {
+  id: number;
+  amount: number;
+  name: string;
+  status: 'Pending' | 'Completed' | 'Rejected';
+  description: string;
+}
+
+interface Client {
+  id: string;
+  name: string;
+  email: string;
+  inn: number;
+}
+
+interface User {
+  id: number;
+  email: string;
+  role: 'client' | 'processor';
+  password: string;
+}
+
+interface FakeData {
+  payments: Payment[];
+  clients: Client[];
+  users: User[];
+}
+
+export const fakeData: FakeData = {
   payments: [
     {
       id: 1,

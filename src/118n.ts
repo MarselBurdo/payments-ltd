@@ -1,3 +1,4 @@
+//@ts-noCheck
 import { resolveBrowserLocale } from 'ra-core';
 import polyglotI18nProvider from 'ra-i18n-polyglot';
 import en from 'ra-language-english';

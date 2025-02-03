@@ -17,23 +17,32 @@ const MainApp = () => (
     dataProvider={fakeDataProvider}
     i18nProvider={i18nProvider}
     authProvider={authProvider}
+    getPermissions={authProvider.getPermissions}
   >
-    <Resource
-      name="payments"
-      recordRepresentation="id"
-      list={PaymentsList}
-      create={PaymentsCreate}
-      show={PaymentsView}
-      icon={PaymentsIcon}
-    />
-    <Resource
-      name="clients"
-      recordRepresentation="title"
-      list={ClientsList}
-      create={ClientsCreate}
-      show={ClientsShow}
-      icon={AssuredWorkloadIcon}
-    />
+    {(permissions) => [
+      (permissions === 'processor' || permissions === 'client') && (
+          <Resource
+              key="payments"
+              name="payments"
+              recordRepresentation="id"
+              list={PaymentsList}
+              create={PaymentsCreate}
+              show={PaymentsView}
+              icon={PaymentsIcon}
+          />
+      ),
+      permissions === 'processor' && (
+          <Resource
+              key="clients"
+              name="clients"
+              recordRepresentation="title"
+              list={ClientsList}
+              create={ClientsCreate}
+              show={ClientsShow}
+              icon={AssuredWorkloadIcon}
+          />
+      ),
+    ]}
   </Admin>
 );
 

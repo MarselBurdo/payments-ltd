@@ -18,7 +18,7 @@ const ListActions = () => (
   </TopToolbar>
 );
 
-const paymentsFilters = [<SearchInput source="q" alwaysOn />];
+const paymentsFilters = [<SearchInput source="q" alwaysOn key="search-input-payments" />];
 
 export function PaymentsList() {
   return (
@@ -28,11 +28,12 @@ export function PaymentsList() {
       perPage={10}
       actions={<ListActions />}
       filters={paymentsFilters}
+      key={'payments.dataGrid.list'}
     >
       <DatagridConfigurable preferenceKey={'payments.dataGrid'}>
-        <TextField source="name" />
-        <TextField source="amount" />
-        <TextField source="status" />
+        <TextField source="name"/>
+        <TextField source="amount"/>
+        <TextField source="status"/>
         <TextField source="description" />
       </DatagridConfigurable>
     </List>
