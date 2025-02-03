@@ -4,7 +4,7 @@ import { fakeData } from '@/constants/fakeData';
 
 const fakeDataProvider: DataProvider = {
   getList: (resource, params) => {
-    const { page, perPage } = params.pagination;
+    const { page=1, perPage=10 } = params.pagination || {};
     const { field, order } = params.sort || { field: 'id', order: 'ASC' };
     const { q } = params.filter || {};
 

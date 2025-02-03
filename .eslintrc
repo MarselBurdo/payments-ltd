@@ -1,0 +1,162 @@
+{
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:react/jsx-runtime",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "ignorePatterns": [
+    "**/*.js"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "react",
+    "react-hooks",
+    "prettier",
+    "@typescript-eslint",
+    "import"
+  ],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "rules": {
+    "no-console": "warn",
+    "no-await-in-loop": "off",
+    "no-promise-executor-return": "error",
+    "no-template-curly-in-string": "error",
+    "no-unreachable-loop": "error",
+    "no-unsafe-optional-chaining": "error",
+    "no-useless-backreference": "warn",
+    "require-atomic-updates": "error",
+    "array-callback-return": "error",
+    "eqeqeq": [
+      "error",
+      "always"
+    ],
+    "no-alert": "error",
+    "no-caller": "error",
+    "no-else-return": "off",
+    "no-empty-function": "warn",
+    "no-eval": "error",
+    "no-extend-native": "error",
+    "no-implied-eval": "error",
+    "no-invalid-this": "off",
+    "no-iterator": "error",
+    "no-labels": "error",
+    "no-lone-blocks": "error",
+    "no-loop-func": "error",
+    "no-useless-escape": "off",
+    "no-return-assign": "error",
+    "no-return-await": "off",
+    "no-script-url": "error",
+    "no-self-compare": "error",
+    "no-throw-literal": "error",
+    "no-unmodified-loop-condition": "warn",
+    "no-useless-call": "warn",
+    "no-useless-return": "warn",
+    "radix": "error",
+    "no-use-before-define": "error",
+    "no-duplicate-imports": "warn",
+    "no-useless-rename": "warn",
+    "no-var": "error",
+    "prefer-const": "warn",
+    "prefer-spread": "warn",
+    "prefer-template": "warn",
+    "no-shadow": "off",
+    "@typescript-eslint/array-type": "warn",
+    "@typescript-eslint/no-confusing-non-null-assertion": "warn",
+    "@typescript-eslint/no-confusing-void-expression": "warn",
+    "@typescript-eslint/no-require-imports": "warn",
+    "@typescript-eslint/no-shadow": "warn",
+    "@typescript-eslint/no-unnecessary-boolean-literal-compare": "warn",
+    "@typescript-eslint/no-unnecessary-condition": "off",
+    "@typescript-eslint/no-unnecessary-qualifier": "warn",
+    "@typescript-eslint/no-unnecessary-type-arguments": "warn",
+    "@typescript-eslint/no-unnecessary-type-constraint": "warn",
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-unused-expressions": "off",
+    "@typescript-eslint/non-nullable-type-assertion-style": "off",
+    "@typescript-eslint/prefer-for-of": "warn",
+    "@typescript-eslint/prefer-includes": "warn",
+    "@typescript-eslint/prefer-literal-enum-member": "warn",
+    "@typescript-eslint/prefer-nullish-coalescing": "warn",
+    "@typescript-eslint/prefer-optional-chain": "off",
+    "@typescript-eslint/prefer-reduce-type-parameter": "warn",
+    "@typescript-eslint/prefer-string-starts-ends-with": "warn",
+    "@typescript-eslint/prefer-ts-expect-error": "warn",
+    "@typescript-eslint/promise-function-async": "warn",
+    "@typescript-eslint/require-array-sort-compare": "warn",
+    "@typescript-eslint/unified-signatures": "warn",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-this-alias": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-dynamic-delete": "off",
+    "react/no-array-index-key": "off",
+    "react/no-unused-prop-types": "warn",
+    "react/no-unused-state": "warn",
+    "react/jsx-handler-names": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object"
+        ],
+        "pathGroups": [
+          {
+            "pattern": ":**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": ".**",
+            "group": "internal",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": [
+          "builtin"
+        ],
+        "alphabetize": {
+          "order": "asc"
+        },
+        "newlines-between": "always"
+      }
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 110,
+        "trailingComma": "es5",
+        "tabWidth": 4,
+        "semi": true,
+        "singleQuote": true,
+        "useTabs": false,
+        "usePrettierrc": true
+      }
+    ]
+  }
+}

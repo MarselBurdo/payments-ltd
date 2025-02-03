@@ -17,6 +17,7 @@ export const authProvider = {
     }
 
     localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('role', user.role);
     return Promise.resolve(user);
   },
 
@@ -42,4 +43,5 @@ export const authProvider = {
     const role = localStorage.getItem('role');
     return role ? Promise.resolve(role) : Promise.reject();
   },
+
 };
