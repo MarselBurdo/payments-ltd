@@ -15,24 +15,27 @@
     "i18next": "^24.2.2",
     "i18next-browser-languagedetector": "^8.0.2",
     "i18next-http-backend": "^3.0.2",
-    "next": "15.1.6",
-    "ra-i18n-polyglot": "^5.5.2",
-    "ra-language-english": "^5.5.2",
+    "next": "15.1.7",
+    "ra-i18n-polyglot": "^5.5.3",
+    "ra-language-english": "^5.5.3",
     "ra-language-russian": "^5.4.3",
     "react": "^19.0.0",
-    "react-admin": "^5.5.2",
+    "react-admin": "^5.5.3",
     "react-dom": "^19.0.0",
-    "react-i18next": "^15.4.0"
+    "react-hook-form": "^7.53.0",
+    "react-i18next": "^15.4.0",
+    "react-router": "^7.1.5",
+    "react-router-dom": "^7.1.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
-    "@types/node": "^20",
+    "@types/node": "^22.13.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.1.6",
-    "prettier": "^3.4.2",
+    "eslint": "^9.20.1",
+    "eslint-config-next": "15.1.7",
+    "prettier": "^3.5.0",
     "typescript": "^5"
   }
 }
