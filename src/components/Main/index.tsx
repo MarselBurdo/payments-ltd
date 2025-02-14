@@ -11,30 +11,35 @@ import { PaymentsList } from '@/components/Payments/PaymentsList';
 import { PaymentsView } from '@/components/Payments/PaymentsView';
 import { authProvider } from '@/utils/authProvider';
 import fakeDataProvider from '@/utils/fakeDataProvider';
+import {dataProvider} from "@/utils/fakerest";
+import Layout from "@/components/Layout/Layout";
+import deals from "@/components/Deals";
 
 const MainApp = () => (
   <Admin
-    dataProvider={fakeDataProvider}
+    dataProvider={dataProvider}
     i18nProvider={i18nProvider}
     authProvider={authProvider}
     getPermissions={authProvider.getPermissions}
+    layout={Layout}
   >
     {(permissions) => [
       (permissions === 'processor' || permissions === 'client') && (
-          <Resource
-              key="payments"
-              name="payments"
-              recordRepresentation="id"
-              list={PaymentsList}
-              create={PaymentsCreate}
-              show={PaymentsView}
-              icon={PaymentsIcon}
-          />
+          // <Resource
+          //     key="deals"
+          //     name="deals"
+          //     recordRepresentation="id"
+          //     list={PaymentsList}
+          //     create={PaymentsCreate}
+          //     show={PaymentsView}
+          //     icon={PaymentsIcon}
+          // />
+          <Resource name="deals" {...deals} />
       ),
       permissions === 'processor' && (
           <Resource
-              key="clients"
-              name="clients"
+              key="companies"
+              name="companies"
               recordRepresentation="title"
               list={ClientsList}
               create={ClientsCreate}

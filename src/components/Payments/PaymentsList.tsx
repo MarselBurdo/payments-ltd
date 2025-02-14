@@ -23,12 +23,12 @@ const paymentsFilters = [<SearchInput source="q" alwaysOn key="search-input-paym
 export function PaymentsList() {
   return (
     <List
-      resource={'payments'}
+      resource={'deals'}
       pagination={<Pagination rowsPerPageOptions={[10, 25, 50, 100]} />}
       perPage={10}
       actions={<ListActions />}
       filters={paymentsFilters}
-      key={'payments.dataGrid.list'}
+      key={'deals.dataGrid.list'}
     >
       <DatagridConfigurable preferenceKey={'payments.dataGrid'}>
         <TextField source="name"/>

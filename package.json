@@ -11,10 +11,13 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@faker-js/faker": "^9.5.0",
+    "@hello-pangea/dnd": "^18.0.1",
     "i18next": "^24.2.2",
     "i18next-browser-languagedetector": "^8.0.2",
     "i18next-http-backend": "^3.0.2",
     "next": "15.1.7",
+    "ra-data-fakerest": "^5.5.3",
     "ra-i18n-polyglot": "^5.5.3",
     "ra-language-english": "^5.5.3",
     "ra-language-russian": "^5.4.3",

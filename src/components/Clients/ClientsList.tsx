@@ -23,7 +23,7 @@ const clientsFilters = [<SearchInput source="q" alwaysOn key="search-input-clien
 export function ClientsList() {
   return (
     <List
-      resource={'clients'}
+      resource={'companies'}
       pagination={<Pagination rowsPerPageOptions={[10, 25, 50, 100]} />}
       perPage={10}
       actions={<ListActions />}
