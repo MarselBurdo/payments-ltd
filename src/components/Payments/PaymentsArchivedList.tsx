@@ -9,8 +9,8 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useGetIdentity, useGetList } from 'react-admin';
-import { DealCardContent } from './PaymentCard';
-import { Deal } from '@/types';
+import { PaymentCardContent } from './PaymentCard';
+import { Payment } from '@/types';
 import { DialogCloseButton } from '@/misc/DialogCloseButton';
 
 export const PaymentsArchivedList = () => {
@@ -19,7 +19,7 @@ export const PaymentsArchivedList = () => {
         data: archivedLists,
         total,
         isPending,
-    } = useGetList('deals', {
+    } = useGetList('payments', {
         pagination: { page: 1, perPage: 1000 },
         sort: { field: 'archived_at', order: 'DESC' },
         filter: { 'archived_at@not.is': null },
@@ -39,14 +39,14 @@ export const PaymentsArchivedList = () => {
     if (!identity || isPending || !total || !archivedLists) return null;
 
     // Group archived lists by date
-    const archivedListsByDate: { [date: string]: Deal[] } =
+    const archivedListsByDate: { [date: string]: Payment[] } =
         archivedLists.reduce(
-            (acc, deal) => {
-                const date = new Date(deal.archived_at).toDateString();
+            (acc, payment) => {
+                const date = new Date(payment.archived_at).toDateString();
                 if (!acc[date]) {
                     acc[date] = [];
                 }
-                acc[date].push(deal);
+                acc[date].push(payment);
                 return acc;
             },
             {} as { [date: string]: Deal[] }
@@ -59,7 +59,7 @@ export const PaymentsArchivedList = () => {
                 onClick={() => setOpenDialog(true)}
                 sx={{ my: 1 }}
             >
-                View archived deals
+                View archived payments
             </Button>
             <Dialog
                 open={openDialog}
@@ -72,7 +72,7 @@ export const PaymentsArchivedList = () => {
                 <DialogContent>
                     <Stack gap={2}>
                         {Object.entries(archivedListsByDate).map(
-                            ([date, deals]) => (
+                            ([date, payments]) => (
                                 <Stack key={date} gap={1}>
                                     <Typography
                                         variant="body1"
@@ -81,15 +81,15 @@ export const PaymentsArchivedList = () => {
                                         {getRelativeTimeString(date)}
                                     </Typography>
                                     <Grid container spacing={2}>
-                                        {deals.map((deal: Deal) => (
+                                        {payments.map((payment: Deal) => (
                                             <Grid
                                                 item
                                                 xs={12}
                                                 sm={6}
                                                 md={4}
-                                                key={deal.id}
+                                                key={payment.id}
                                             >
-                                                <DealCardContent deal={deal} />
+                                                <PaymentCardContent payment={payment} />
                                             </Grid>
                                         ))}
                                     </Grid>
@@ -122,7 +122,7 @@ export function getRelativeTimeString(dateString: string): string {
     }
 
     // Intl.RelativeTimeFormat for dates within the last week
-    const rtf = new Intl.RelativeTimeFormat(undefined, { numeric: 'auto' });
+    const rtf = new Intl.RelativeTimeFormat('ru', { numeric: 'auto' });
     return ucFirst(rtf.format(unitDiff, 'day'));
 }
 

@@ -101,7 +101,7 @@ export type ContactNote = {
     attachments?: AttachmentNote[];
 } & Pick<RaRecord, 'id'>;
 
-export type Deal = {
+export type Payment = {
     name: string;
     company_id: Identifier;
     contact_ids: Identifier[];
@@ -168,7 +168,7 @@ export type ActivityDealCreated = {
     type: typeof DEAL_CREATED;
     company_id: Identifier;
     sales_id?: Identifier;
-    deal: Deal;
+    deal: Payment;
     date: string;
 };
 
@@ -197,7 +197,7 @@ export interface RAFile {
 }
 
 export type AttachmentNote = RAFile;
-export interface DealStage {
+export interface PaymentStage {
     value: string;
     label: string;
 }

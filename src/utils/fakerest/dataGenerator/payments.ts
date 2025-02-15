@@ -1,16 +1,16 @@
 import { add } from 'date-fns';
 
 import {
-    defaultDealCategories,
-    defaultDealStages,
+    defaultPaymentCategories,
+    defaultPaymentStages,
 } from '@/root/defaultConfiguration';
-import { Deal } from '@/types';
+import { Payment } from '@/types';
 import { Db } from './types';
 import { randomDate } from './utils';
 import {faker} from "@/utils/fakerest/dataGenerator/companies";
 
-export const generatePayments = (db: Db): Deal[] => {
-    const deals = Array.from(Array(50).keys()).map(id => {
+export const generatePayments = (db: Db): Payment[] => {
+    const payments = Array.from(Array(50).keys()).map(id => {
         const company = db.companies.at(faker.seed(54));
         company.nb_deals++;
         const contacts =
@@ -30,8 +30,8 @@ export const generatePayments = (db: Db): Deal[] => {
             name: lowercaseName[0].toUpperCase() + lowercaseName.slice(1),
             company_id: company.id,
             contact_ids: contacts.map(contact => contact.id),
-            category: defaultDealCategories.at(faker.seed(5)),
-            stage: defaultDealStages[Math.floor(Math.random() * defaultDealStages.length)].value,
+            category: defaultPaymentCategories.at(faker.seed(5)),
+            stage: defaultPaymentStages[Math.floor(Math.random() * defaultPaymentStages.length)].value,
             description: faker.lorem.paragraphs(faker.seed(4)),
             amount: faker.seed(1000) * 100000,
             created_at,
@@ -41,12 +41,12 @@ export const generatePayments = (db: Db): Deal[] => {
         };
     });
     // compute index based on stage
-    defaultDealStages.forEach(stage => {
-        deals
+    defaultPaymentStages.forEach(stage => {
+        payments
             .filter(deal => deal.stage === stage.value)
             .forEach((deal, index) => {
-                deals[deal.id].index = index;
+                payments[deal.id].index = index;
             });
     });
-    return deals;
+    return payments;
 };

@@ -17,6 +17,7 @@ import {
     Logout,
     UserMenu,
     useUserMenu,
+    LocalesMenuButton
 } from 'react-admin';
 import { Link, matchPath, useLocation } from 'react-router-dom';
 import { useConfigurationContext } from '@/root/ConfigurationContext';
@@ -33,7 +34,7 @@ const Header = () => {
     } else if (!!matchPath('/companies/*', location.pathname)) {
         currentPath = '/companies';
     } else if (!!matchPath('/payments/*', location.pathname)) {
-        currentPath = '/deals';
+        currentPath = '/payments';
     } else {
         currentPath = false;
     }
@@ -98,8 +99,9 @@ const Header = () => {
                             </Tabs>
                         </Box>
                         <Box display="flex" alignItems="center">
+                            <LocalesMenuButton/>
                             <LoadingIndicator />
-                            <UserMenu>
+                                <UserMenu>
                                 <ConfigurationMenu />
                                 <CanAccess resource="sales" action="list">
                                     <UsersMenu />

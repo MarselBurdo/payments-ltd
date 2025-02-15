@@ -27,17 +27,17 @@ import {
 
 import ArchiveIcon from '@mui/icons-material/Archive';
 import UnarchiveIcon from '@mui/icons-material/Unarchive';
-import { CompanyAvatar } from '../companies/CompanyAvatar';
+import { CompanyAvatar } from '../Companies/CompanyAvatar';
 import { DialogCloseButton } from '@/misc/DialogCloseButton';
 import { useConfigurationContext } from '@/root/ConfigurationContext';
-import { Deal } from '@/types';
+import { Payment } from '@/types';
 import { ContactList } from './ContactList';
-import { findDealLabel } from './payment';
+import { findPaymentLabel } from './payment';
 
 export const PaymentShow = ({ open, id }: { open: boolean; id?: string }) => {
     const redirect = useRedirect();
     const handleClose = () => {
-        redirect('list', 'deals');
+        redirect('list', 'payments');
     };
 
     return (
@@ -65,7 +65,7 @@ export const PaymentShow = ({ open, id }: { open: boolean; id?: string }) => {
 
 const CLOSE_TOP_WITH_ARCHIVED = 14;
 const DealShowContent = ({ handleClose }: { handleClose: () => void }) => {
-    const { dealStages } = useConfigurationContext();
+    const { paymentStages } = useConfigurationContext();
     const record = useRecordContext<Deal>();
     if (!record) return null;
 
@@ -200,7 +200,7 @@ const DealShowContent = ({ handleClose }: { handleClose: () => void }) => {
                                     Stage
                                 </Typography>
                                 <Typography variant="body2">
-                                    {findDealLabel(dealStages, record.stage)}
+                                    {findPaymentLabel(paymentStages, record.stage)}
                                 </Typography>
                             </Box>
                         </Box>
@@ -246,8 +246,8 @@ const DealShowContent = ({ handleClose }: { handleClose: () => void }) => {
                         <Box m={2}>
                             <Divider />
                             <ReferenceManyField
-                                target="deal_id"
-                                reference="dealNotes"
+                                target="payment_id"
+                                reference="paymentNotes"
                                 sort={{ field: 'date', order: 'DESC' }}
                             >
                             </ReferenceManyField>
@@ -286,7 +286,7 @@ const ArchiveButton = ({ record }: { record: Deal }) => {
     const refresh = useRefresh();
     const handleClick = () => {
         update(
-            'deals',
+            'payments',
             {
                 id: record.id,
                 data: { archived_at: new Date().toISOString() },
@@ -294,12 +294,12 @@ const ArchiveButton = ({ record }: { record: Deal }) => {
             },
             {
                 onSuccess: () => {
-                    redirect('list', 'deals');
+                    redirect('list', 'payments');
                     notify('Deal archived', { type: 'info', undoable: false });
                     refresh();
                 },
                 onError: () => {
-                    notify('Error: deal not archived', { type: 'error' });
+                    notify('Error: payment not archived', { type: 'error' });
                 },
             }
         );
@@ -321,7 +321,7 @@ const UnarchiveButton = ({ record }: { record: Deal }) => {
     const { mutate } = useMutation({
         mutationFn: () => dataProvider.unarchiveDeal(record),
         onSuccess: () => {
-            redirect('list', 'deals');
+            redirect('list', 'payments');
             notify('Deal unarchived', {
                 type: 'info',
                 undoable: false,
@@ -329,7 +329,7 @@ const UnarchiveButton = ({ record }: { record: Deal }) => {
             refresh();
         },
         onError: () => {
-            notify('Error: deal not unarchived', { type: 'error' });
+            notify('Error: payment not unarchived', { type: 'error' });
         },
     });
 

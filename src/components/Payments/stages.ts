@@ -1,28 +1,28 @@
-import { ConfigurationContextValue } from '../root/ConfigurationContext';
-import { Deal } from '../types';
+import { ConfigurationContextValue } from '@/root/ConfigurationContext';
+import { Payment } from '@/types';
 
-export type DealsByStage = Record<Deal['stage'], Deal[]>;
+export type PaymentsByStage = Record<Payment['stage'], Payment[]>;
 
-export const getDealsByStage = (
-    unorderedDeals: Deal[],
-    dealStages: ConfigurationContextValue['dealStages']
+export const getPaymentsByStage = (
+    unorderedDeals: Payment[],
+    paymentStages: ConfigurationContextValue['paymentStages']
 ) => {
-    if (!dealStages) return {};
-    const dealsByStage: Record<Deal['stage'], Deal[]> = unorderedDeals.reduce(
-        (acc, deal) => {
-            acc[deal.stage].push(deal);
+    if (!paymentStages) return {};
+    const paymentsByStage: Record<Payment['stage'], Payment[]> = unorderedDeals.reduce(
+        (acc, payment) => {
+            acc[payment.stage].push(payment);
             return acc;
         },
-        dealStages.reduce(
+        paymentStages.reduce(
             (obj, stage) => ({ ...obj, [stage.value]: [] }),
-            {} as Record<Deal['stage'], Deal[]>
+            {} as Record<Payment['stage'], Payment[]>
         )
     );
     // order each column by index
-    dealStages.forEach(stage => {
-        dealsByStage[stage.value] = dealsByStage[stage.value].sort(
-            (recordA: Deal, recordB: Deal) => recordA.index - recordB.index
+    paymentStages.forEach(stage => {
+        paymentsByStage[stage.value] = paymentsByStage[stage.value].sort(
+            (recordA: Payment, recordB: Payment) => recordA.index - recordB.index
         );
     });
-    return dealsByStage;
+    return paymentsByStage;
 };

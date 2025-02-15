@@ -1,37 +1,37 @@
 import { Draggable } from '@hello-pangea/dnd';
 import { Box, Card, Typography } from '@mui/material';
 import { ReferenceField, useRedirect } from 'react-admin';
-import { CompanyAvatar } from '../companies/CompanyAvatar';
-import { Deal } from '@/types';
+import { CompanyAvatar } from '../Companies/CompanyAvatar';
+import { Payment} from '@/types';
 
-export const PaymentCard = ({ deal, index }: { deal: Deal; index: number }) => {
-    if (!deal) return null;
+export const PaymentCard = ({ payment, index }: { payment: Payment; index: number }) => {
+    if (!payment) return null;
 
     return (
-        <Draggable draggableId={String(deal.id)} index={index}>
+        <Draggable draggableId={String(payment.id)} index={index}>
             {(provided, snapshot) => (
-                <DealCardContent
+                <PaymentCardContent
                     provided={provided}
                     snapshot={snapshot}
-                    deal={deal}
+                    payment={payment}
                 />
             )}
         </Draggable>
     );
 };
 
-export const DealCardContent = ({
+export const PaymentCardContent = ({
     provided,
     snapshot,
-    deal,
+    payment,
 }: {
     provided?: any;
     snapshot?: any;
-    deal: Deal;
+    payment: Deal;
 }) => {
     const redirect = useRedirect();
     const handleClick = () => {
-        redirect(`/deals/${deal.id}/show`, undefined, undefined, undefined, {
+        redirect(`/payments/${payment.id}/show`, undefined, undefined, undefined, {
             _scrollToTop: false,
         });
     };
@@ -54,7 +54,7 @@ export const DealCardContent = ({
                 <Box padding={1} display="flex">
                     <ReferenceField
                         source="company_id"
-                        record={deal}
+                        record={payment}
                         reference="companies"
                         link={false}
                     >
@@ -62,17 +62,17 @@ export const DealCardContent = ({
                     </ReferenceField>
                     <Box sx={{ marginLeft: 1 }}>
                         <Typography variant="body2" gutterBottom>
-                            {deal.name}
+                            {payment.name}
                         </Typography>
                         <Typography variant="caption" color="textSecondary">
-                            {deal.amount.toLocaleString('en-US', {
+                            {payment.amount.toLocaleString('en-US', {
                                 notation: 'compact',
                                 style: 'currency',
                                 currency: 'USD',
                                 currencyDisplay: 'narrowSymbol',
                                 minimumSignificantDigits: 3,
                             })}
-                            {deal.category ? `, ${deal.category}` : ''}
+                            {payment.category ? `, ${payment.category}` : ''}
                         </Typography>
                     </Box>
                 </Box>

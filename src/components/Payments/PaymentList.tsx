@@ -36,26 +36,26 @@ const PaymentList = () => {
             }}
             sort={{ field: 'index', order: 'DESC' }}
         >
-            <DealLayout />
+            <PaymentLayout />
         </ListBase>
     );
 };
 
-const DealLayout = () => {
+const PaymentLayout = () => {
     const location = useLocation();
-    const matchCreate = matchPath('/deals/create', location.pathname);
-    const matchShow = matchPath('/deals/:id/show', location.pathname);
-    const matchEdit = matchPath('/deals/:id', location.pathname);
+    const matchCreate = matchPath('/payments/create', location.pathname);
+    const matchShow = matchPath('/payments/:id/show', location.pathname);
+    const matchEdit = matchPath('/payments/:id', location.pathname);
 
-    const { dealCategories } = useConfigurationContext();
+    const { paymentCategories } = useConfigurationContext();
 
-    const dealFilters = [
+    const paymentFilters = [
         <SearchInput source="q" alwaysOn />,
         <ReferenceInput source="company_id" reference="companies" />,
         <SelectInput
             source="category"
             label="Category"
-            choices={dealCategories.map(type => ({ id: type, name: type }))}
+            choices={paymentCategories.map(type => ({ id: type, name: type }))}
         />,
         <OnlyMineInput source="sales_id" alwaysOn />,
     ];
@@ -76,8 +76,8 @@ const DealLayout = () => {
 
     return (
         <Stack component="div" sx={{ width: '100%' }}>
-            <Title title={'Deals'} />
-            <ListToolbar filters={dealFilters} actions={<DealActions />} />
+            <Title title={'Payments'} />
+            <ListToolbar filters={paymentFilters} actions={<PaymentActions />} />
             <Card>
                 <PaymentListContent />
             </Card>
@@ -92,14 +92,14 @@ const DealLayout = () => {
     );
 };
 
-const DealActions = () => {
+const PaymentActions = () => {
     return (
         <TopToolbar>
             <FilterButton />
             <ExportButton />
             <CreateButton
                 variant="contained"
-                label="New Deal"
+                label="New Payment"
                 sx={{ marginLeft: 2 }}
             />
         </TopToolbar>

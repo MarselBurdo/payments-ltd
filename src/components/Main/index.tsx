@@ -12,6 +12,8 @@ import { authProvider } from '@/utils/authProvider';
 import {dataProvider} from "@/utils/fakerest";
 import Layout from "@/components/Layout/Layout";
 import payments from "@/components/Payments";
+import companies from "@/components/Companies";
+import contacts from "@/components/Contacts";
 
 const MainApp = () => (
   <Admin
@@ -23,29 +25,13 @@ const MainApp = () => (
   >
     {(permissions) => [
       (permissions === 'processor' || permissions === 'client') && (
-          // <Resource
-          //     key="deals"
-          //     name="deals"
-          //     recordRepresentation="id"
-          //     list={PaymentsList1}
-          //     create={PaymentsCreate1}
-          //     show={PaymentsView1}
-          //     icon={PaymentsIcon}
-          // />
           <Resource name="payments" {...payments} />
       ),
       permissions === 'processor' && (
-          <Resource
-              key="companies"
-              name="companies"
-              recordRepresentation="title"
-              list={ClientsList}
-              create={ClientsCreate}
-              show={ClientsShow}
-              icon={AssuredWorkloadIcon}
-          />
+          <Resource name="companies" {...companies} />
       ),
     ]}
+          <Resource name="contacts" {...contacts} />
   </Admin>
 );
 

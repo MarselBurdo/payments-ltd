@@ -10,7 +10,7 @@ import {
 import {
     Company,
     Contact,
-    Deal,
+    Payment,
     Sale,
     SalesFormData,
     SignUpData,
@@ -107,27 +107,27 @@ async function fetchAndUpdateCompanyData(
 
 const dataProviderWithCustomMethod = {
     ...baseDataProvider,
-    unarchiveDeal: async (deal: Deal) => {
+    unarchivePayment: async (payment: Payment) => {
         // get all deals where stage is the same as the deal to unarchive
-        const { data: deals } = await baseDataProvider.getList<Deal>('deals', {
-            filter: { stage: deal.stage },
+        const { data: payments } = await baseDataProvider.getList<Payment>('payments', {
+            filter: { stage: payment.stage },
             pagination: { page: 1, perPage: 1000 },
             sort: { field: 'index', order: 'ASC' },
         });
 
         // set index for each deal starting from 1, if the deal to unarchive is found, set its index to the last one
-        const updatedDeals = deals.map((d, index) => ({
+        const updatedDeals = payments.map((d, index) => ({
             ...d,
-            index: d.id === deal.id ? 0 : index + 1,
+            index: d.id === payment.id ? 0 : index + 1,
             archived_at: d.id === deal.id ? null : d.archived_at,
         }));
 
         return await Promise.all(
             updatedDeals.map(updatedDeal =>
-                dataProvider.update('deals', {
+                dataProvider.update('payments', {
                     id: updatedDeal.id,
                     data: updatedDeal,
-                    previousData: deals.find(d => d.id === updatedDeal.id),
+                    previousData: payments.find(d => d.id === updatedDeal.id),
                 })
             )
         );
@@ -277,7 +277,7 @@ export const dataProvider = withLifecycleCallbacks(
 
                 const newSaleId = params.meta.identity.id as Identifier;
 
-                const [companies, contacts, contactNotes, deals] =
+                const [companies, contacts, contactNotes, payments] =
                     await Promise.all([
                         dataProvider.getList('companies', {
                             filter: { sales_id: params.id },
@@ -303,7 +303,7 @@ export const dataProvider = withLifecycleCallbacks(
                             },
                             sort: { field: 'id', order: 'ASC' },
                         }),
-                        dataProvider.getList('deals', {
+                        dataProvider.getList('payments', {
                             filter: { sales_id: params.id },
                             pagination: {
                                 page: 1,
@@ -332,8 +332,8 @@ export const dataProvider = withLifecycleCallbacks(
                             sales_id: newSaleId,
                         },
                     }),
-                    dataProvider.updateMany('deals', {
-                        ids: deals.data.map(company => company.id),
+                    dataProvider.updateMany('payments', {
+                        ids: payments.data.map(company => company.id),
                         data: {
                             sales_id: newSaleId,
                         },
@@ -476,7 +476,7 @@ export const dataProvider = withLifecycleCallbacks(
             },
         } satisfies ResourceCallbacks<Company>,
         {
-            resource: 'deals',
+            resource: 'payments',
             beforeCreate: async params => {
                 return {
                     ...params,

@@ -11,7 +11,7 @@ import {
     Company,
     Contact,
     ContactNote,
-    Deal,
+    Payment,
     DealNote,
 } from '@/types';
 
@@ -129,7 +129,7 @@ async function getNewDealsAndNotes(
     dataProvider: DataProvider,
     filter: any
 ): Promise<Activity[]> {
-    const { data: deals } = await dataProvider.getList<Deal>('deals', {
+    const { data: payments } = await dataProvider.getList<Payment>('payments', {
         filter,
         pagination: { page: 1, perPage: 250 },
         sort: { field: 'created_at', order: 'DESC' },
@@ -142,7 +142,7 @@ async function getNewDealsAndNotes(
     if (filter.company_id) {
         // No company_id field in dealNote, filtering by related deals instead.
         // This filter is only valid if a deal has less than 250 notes.
-        const dealIds = deals.map(deal => deal.id).join(',');
+        const dealIds = payments.map(deal => deal.id).join(',');
         recentDealNotesFilter['deal_id@in'] = `(${dealIds})`;
     }
 
@@ -155,7 +155,7 @@ async function getNewDealsAndNotes(
         }
     );
 
-    const newDeals = deals.map(deal => ({
+    const newDeals = payments.map(deal => ({
         id: `deal.${deal.id}.created`,
         type: DEAL_CREATED,
         company_id: deal.company_id,

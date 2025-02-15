@@ -16,7 +16,7 @@ import Layout from '../layout/Layout';
 import companies from '../companies';
 import contacts from '../contacts';
 import { Dashboard } from '../dashboard/Dashboard';
-import deals from '../deals';
+import payments from '../payments';
 import { LoginPage } from '../login/LoginPage';
 import { SignupPage } from '../login/SignupPage';
 import { authProvider, dataProvider } from '../providers/fakerest';
@@ -29,9 +29,9 @@ import {
 import {
     defaultCompanySectors,
     defaultContactGender,
-    defaultDealCategories,
-    defaultDealPipelineStatuses,
-    defaultDealStages,
+    defaultPaymentCategories,
+    defaultPaymentPipelineStatuses,
+    defaultPaymentStages,
     defaultLogo,
     defaultNoteStatuses,
     defaultTaskTypes,
@@ -69,7 +69,7 @@ const defaultLightTheme = deepmerge(defaultTheme, {
 const i18nProvider = polyglotI18nProvider(
     () => englishMessages,
     'en',
-    [{ locale: 'en', name: 'English' }],
+    [{ locale: 'en', name: 'English' },{locale:'ru', name:'Russian'}],
     { allowMissing: true }
 );
 
@@ -85,7 +85,7 @@ const i18nProvider = polyglotI18nProvider(
  * @param {RaThemeOptions} darkTheme - The theme to use when the application is in dark mode.
  * @param {string[]} dealCategories - The categories of deals used in the application.
  * @param {string[]} dealPipelineStatuses - The statuses of deals in the pipeline used in the application.
- * @param {DealStage[]} dealStages - The stages of deals used in the application.
+ * @param {PaymentStage[]} dealStages - The stages of deals used in the application.
  * @param {RaThemeOptions} lightTheme - The theme to use when the application is in light mode.
  * @param {string} logo - The logo used in the CRM application.
  * @param {NoteStatus[]} noteStatuses - The statuses of notes used in the application.
@@ -117,9 +117,9 @@ export const CRM = ({
     contactGender = defaultContactGender,
     companySectors = defaultCompanySectors,
     darkTheme,
-    dealCategories = defaultDealCategories,
-    dealPipelineStatuses = defaultDealPipelineStatuses,
-    dealStages = defaultDealStages,
+    dealCategories = defaultPaymentCategories,
+    dealPipelineStatuses = defaultPaymentPipelineStatuses,
+    dealStages = defaultPaymentStages,
     lightTheme = defaultLightTheme,
     logo = defaultLogo,
     noteStatuses = defaultNoteStatuses,
@@ -156,7 +156,7 @@ export const CRM = ({
             <CustomRoutes>
                 <Route path={SettingsPage.path} element={<SettingsPage />} />
             </CustomRoutes>
-            <Resource name="deals" {...deals} />
+            <Resource name="deals" {...payments} />
             <Resource name="contacts" {...contacts} />
             <Resource name="companies" {...companies} />
             <Resource name="contactNotes" />

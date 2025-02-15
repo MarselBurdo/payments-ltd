@@ -1,21 +1,21 @@
 import { Droppable } from '@hello-pangea/dnd';
 import { Box, Stack, Typography } from '@mui/material';
 
-import { Deal } from '@/types';
+import { Payment } from '@/types';
 import { PaymentCard } from './PaymentCard';
 import { useConfigurationContext } from '@/root/ConfigurationContext';
-import { findDealLabel } from './payment';
+import { findPaymentLabel } from './payment';
 
 export const PaymentColumn = ({
     stage,
-    deals,
+    payments,
 }: {
     stage: string;
-    deals: Deal[];
+    payments: Payment[];
 }) => {
-    const totalAmount = deals.reduce((sum, deal) => sum + deal.amount, 0);
+    const totalAmount = payments.reduce((sum, payment) => sum + payment.amount, 0);
 
-    const { dealStages } = useConfigurationContext();
+    const { paymentStages } = useConfigurationContext();
     return (
         <Box
             sx={{
@@ -35,7 +35,7 @@ export const PaymentColumn = ({
         >
             <Stack alignItems="center">
                 <Typography variant="subtitle1">
-                    {findDealLabel(dealStages, stage)}
+                    {findPaymentLabel(paymentStages, stage)}
                 </Typography>
                 <Typography
                     variant="subtitle1"
@@ -69,8 +69,8 @@ export const PaymentColumn = ({
                             },
                         }}
                     >
-                        {deals.map((deal, index) => (
-                            <PaymentCard key={deal.id} deal={deal} index={index} />
+                        {payments.map((payment, index) => (
+                            <PaymentCard key={payment.id} payment={payment} index={index} />
                         ))}
                         {droppableProvided.placeholder}
                     </Box>

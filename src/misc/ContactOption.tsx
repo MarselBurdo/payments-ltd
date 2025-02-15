@@ -1,6 +1,6 @@
 import { Stack, Typography } from '@mui/material';
 import { useRecordContext } from 'react-admin';
-import { Avatar } from '@/components/contacts/Avatar';
+import { Avatar } from '@/components/Contacts/Avatar';
 import { Contact } from '@/types';
 
 const ContactOptionRender = () => {

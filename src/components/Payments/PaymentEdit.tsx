@@ -20,15 +20,15 @@ import {
 import { Link } from 'react-router-dom';
 import { DialogCloseButton } from '@/misc/DialogCloseButton';
 import { Deal } from '@/types';
-import { PaymentDealInputs } from './PaymentDealInputs';
-import { CompanyAvatar } from '../companies/CompanyAvatar';
+import { PaymentInputs } from './PaymentDealInputs';
+import { CompanyAvatar } from '../Companies/CompanyAvatar';
 
 export const PaymentEdit = ({ open, id }: { open: boolean; id?: string }) => {
     const redirect = useRedirect();
     const notify = useNotify();
 
     const handleClose = () => {
-        redirect('/deals', undefined, undefined, undefined, {
+        redirect('/payments', undefined, undefined, undefined, {
             _scrollToTop: false,
         });
     };
@@ -53,7 +53,7 @@ export const PaymentEdit = ({ open, id }: { open: boolean; id?: string }) => {
                         onSuccess: () => {
                             notify('Deal updated');
                             redirect(
-                                `/deals/${id}/show`,
+                                `/payments/${id}/show`,
                                 undefined,
                                 undefined,
                                 undefined,
@@ -68,7 +68,7 @@ export const PaymentEdit = ({ open, id }: { open: boolean; id?: string }) => {
                     <EditHeader />
                     <Form>
                         <DialogContent>
-                            <PaymentDealInputs />
+                            <PaymentInputs />
                         </DialogContent>
                         <EditToolbar />
                     </Form>
@@ -110,7 +110,7 @@ function EditHeader() {
                 <Stack direction="row" spacing={1} sx={{ pr: 3 }}>
                     <Button
                         component={Link}
-                        to={`/deals/${deal.id}/show`}
+                        to={`/payments/${deal.id}/show`}
                         size="small"
                     >
                         Back to deal

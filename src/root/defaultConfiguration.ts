@@ -4,7 +4,7 @@ import Woman2Icon from '@mui/icons-material/Woman2';
 
 export const defaultLogo = './logos/logo_atomic_crm.svg';
 
-export const defaultTitle = 'Atomic CRM';
+export const defaultTitle = 'Payment CRM';
 
 export const defaultCompanySectors = [
     'Communication Services',
@@ -20,18 +20,18 @@ export const defaultCompanySectors = [
     'Utilities',
 ];
 
-export const defaultDealStages = [
+export const defaultPaymentStages = [
     { value: 'opportunity', label: 'Moderation' },
     { value: 'proposal-sent', label: 'Send recipient' },
     { value: 'in-negociation', label: 'Pending' },
     { value: 'won', label: 'Done' },
     { value: 'lost', label: 'Rejected' },
-    { value: 'delayed', label: 'Кedirected' },
+    { value: 'delayed', label: 'Redirected' },
 ];
 
-export const defaultDealPipelineStatuses = ['won'];
+export const defaultPaymentPipelineStatuses = ['won'];
 
-export const defaultDealCategories = [
+export const defaultPaymentCategories = [
     'Other',
     'Copywriting',
     'Print project',

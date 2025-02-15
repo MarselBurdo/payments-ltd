@@ -5,10 +5,11 @@ import { matchPath, useLocation } from 'react-router';
 import { PaymentCreate } from './PaymentCreate';
 import { Contact } from '@/types';
 import { Link } from 'react-router-dom';
+import {ReactNode} from "react";
 
-export const PaymentEmpty = ({ children }: { children?: React.ReactNode }) => {
+export const PaymentEmpty = ({ children }: { children?: ReactNode }) => {
     const location = useLocation();
-    const matchCreate = matchPath('/deals/create', location.pathname);
+    const matchCreate = matchPath('/payments/create', location.pathname);
     const appbarHeight = useAppBarHeight();
 
     // get Contact data
@@ -35,7 +36,7 @@ export const PaymentEmpty = ({ children }: { children?: React.ReactNode }) => {
                 <>
                     <Stack gap={0} alignItems="center">
                         <Typography variant="h6" fontWeight="bold">
-                            No deals found
+                            No payments found
                         </Typography>
                         <Typography
                             variant="body2"
@@ -43,11 +44,11 @@ export const PaymentEmpty = ({ children }: { children?: React.ReactNode }) => {
                             color="text.secondary"
                             gutterBottom
                         >
-                            It seems your deal list is empty.
+                            It seems your payment list is empty.
                         </Typography>
                     </Stack>
                     <Stack spacing={2} direction="row">
-                        <CreateButton variant="contained" label="Create deal" />
+                        <CreateButton variant="contained" label="Create payment" />
                     </Stack>
                     <PaymentCreate open={!!matchCreate} />
                     {children}
@@ -55,7 +56,7 @@ export const PaymentEmpty = ({ children }: { children?: React.ReactNode }) => {
             ) : (
                 <Stack gap={0} alignItems="center">
                     <Typography variant="h6" fontWeight="bold">
-                        No deals found
+                        No payments found
                     </Typography>
                     <Typography
                         variant="body2"
@@ -68,7 +69,7 @@ export const PaymentEmpty = ({ children }: { children?: React.ReactNode }) => {
                         <Link to="/contacts/create">
                             Add your first contact
                         </Link>{' '}
-                        before creating a deal.
+                        before creating a payment.
                     </Typography>
                 </Stack>
             )}

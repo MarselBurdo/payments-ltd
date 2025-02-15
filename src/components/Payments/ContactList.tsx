@@ -1,7 +1,7 @@
 import { Link, Stack, Typography } from '@mui/material';
 import { useListContext } from 'react-admin';
 import { Link as RouterLink } from 'react-router-dom';
-import { Avatar } from '../contacts/Avatar';
+import { Avatar } from '../Contacts/Avatar';
 
 export const ContactList = () => {
     const { data, error, isPending } = useListContext();

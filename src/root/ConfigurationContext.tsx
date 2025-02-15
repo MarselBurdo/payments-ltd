@@ -2,22 +2,21 @@ import { createContext, ReactNode, useContext } from 'react';
 import {
     defaultCompanySectors,
     defaultContactGender,
-    defaultDealCategories,
-    defaultDealPipelineStatuses,
-    defaultDealStages,
+    defaultPaymentPipelineStatuses,
+    defaultPaymentStages,
     defaultLogo,
     defaultNoteStatuses,
     defaultTaskTypes,
-    defaultTitle,
+    defaultTitle, defaultPaymentCategories,
 } from './defaultConfiguration';
-import { ContactGender, DealStage, NoteStatus } from '../types';
+import { ContactGender, PaymentStage, NoteStatus } from '@/types';
 
 // Define types for the context value
 export interface ConfigurationContextValue {
     companySectors: string[];
-    dealCategories: string[];
-    dealPipelineStatuses: string[];
-    dealStages: DealStage[];
+    paymentCategories: string[];
+    paymentPipelineStatuses: string[];
+    paymentStages: PaymentStage[];
     noteStatuses: NoteStatus[];
     taskTypes: string[];
     title: string;
@@ -32,9 +31,9 @@ export interface ConfigurationProviderProps extends ConfigurationContextValue {
 // Create context with default value
 export const ConfigurationContext = createContext<ConfigurationContextValue>({
     companySectors: defaultCompanySectors,
-    dealCategories: defaultDealCategories,
-    dealPipelineStatuses: defaultDealPipelineStatuses,
-    dealStages: defaultDealStages,
+    paymentCategories: defaultPaymentCategories,
+    paymentPipelineStatuses: defaultPaymentPipelineStatuses,
+    paymentStages: defaultPaymentStages,
     noteStatuses: defaultNoteStatuses,
     taskTypes: defaultTaskTypes,
     title: defaultTitle,
@@ -45,9 +44,9 @@ export const ConfigurationContext = createContext<ConfigurationContextValue>({
 export const ConfigurationProvider = ({
     children,
     companySectors,
-    dealCategories,
-    dealPipelineStatuses,
-    dealStages,
+    paymentCategories,
+    paymentPipelineStatuses,
+    paymentStages,
     logo,
     noteStatuses,
     taskTypes,
@@ -57,9 +56,9 @@ export const ConfigurationProvider = ({
     <ConfigurationContext.Provider
         value={{
             companySectors,
-            dealCategories,
-            dealPipelineStatuses,
-            dealStages,
+            paymentCategories,
+            paymentPipelineStatuses,
+            paymentStages,
             logo,
             noteStatuses,
             title,

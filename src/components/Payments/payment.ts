@@ -1,5 +1,5 @@
-import { DealStage } from '@/types';
+import { PaymentStage } from '@/types';
 
-export const findDealLabel = (dealStages: DealStage[], dealValue: string) => {
-    return dealStages.find(dealStage => dealStage.value === dealValue)?.label;
+export const findPaymentLabel = (paymentStages: PaymentStage[], paymentValue: string) => {
+    return paymentStages.find(paymentStage => paymentStage.value === paymentValue)?.label;
 };

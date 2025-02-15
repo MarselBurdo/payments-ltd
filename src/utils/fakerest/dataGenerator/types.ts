@@ -2,7 +2,7 @@ import {
     Company,
     Contact,
     ContactNote,
-    Deal,
+    Payment,
     DealNote,
     Sale,
     Tag,

@@ -4,29 +4,29 @@ import isEqual from 'lodash/isEqual';
 import { useEffect, useState } from 'react';
 import { DataProvider, useDataProvider, useListContext } from 'react-admin';
 
-import { Deal } from '@/types';
+import { Payment } from '@/types';
 import { PaymentColumn } from './PaymentColumn';
-import { DealsByStage, getDealsByStage } from './stages';
+import { PaymentsByStage, getPaymentsByStage } from './stages';
 import { useConfigurationContext } from '@/root/ConfigurationContext';
 
 export const PaymentListContent = () => {
-    const { dealStages } = useConfigurationContext();
-    const { data: unorderedDeals, isPending, refetch } = useListContext<Deal>();
+    const { paymentStages } = useConfigurationContext();
+    const { data: unorderedPayments, isPending, refetch } = useListContext<Payment>();
     const dataProvider = useDataProvider();
 
-    const [dealsByStage, setDealsByStage] = useState<DealsByStage>(
-        getDealsByStage([], dealStages)
+    const [paymentsByStage, setPaymentsByStage] = useState<PaymentsByStage>(
+        getPaymentsByStage([], paymentStages)
     );
 
     useEffect(() => {
-        if (unorderedDeals) {
-            const newDealsByStage = getDealsByStage(unorderedDeals, dealStages);
-            if (!isEqual(newDealsByStage, dealsByStage)) {
-                setDealsByStage(newDealsByStage);
+        if (unorderedPayments) {
+            const newPaymentsByStage = getPaymentsByStage(unorderedPayments, paymentStages);
+            if (!isEqual(newPaymentsByStage, paymentsByStage)) {
+                setPaymentsByStage(newPaymentsByStage);
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [unorderedDeals]);
+    }, [unorderedPayments]);
 
     if (isPending) return null;
 
@@ -46,8 +46,8 @@ export const PaymentListContent = () => {
 
         const sourceStage = source.droppableId;
         const destinationStage = destination.droppableId;
-        const sourceDeal = dealsByStage[sourceStage][source.index]!;
-        const destinationDeal = dealsByStage[destinationStage][
+        const sourcePayment = paymentsByStage[sourceStage][source.index]!;
+        const destinationPayment = paymentsByStage[destinationStage][
             destination.index
         ] ?? {
             stage: destinationStage,
@@ -55,17 +55,17 @@ export const PaymentListContent = () => {
         };
 
         // compute local state change synchronously
-        setDealsByStage(
-            updateDealStageLocal(
-                sourceDeal,
+        setPaymentsByStage(
+            updatePaymentStageLocal(
+                sourcePayment,
                 { stage: sourceStage, index: source.index },
                 { stage: destinationStage, index: destination.index },
-                dealsByStage
+                paymentsByStage
             )
         );
 
         // persist the changes
-        updateDealStage(sourceDeal, destinationDeal, dataProvider).then(() => {
+        updatePaymentStage(sourcePayment, destinationPayment, dataProvider).then(() => {
             refetch();
         });
     };
@@ -73,10 +73,10 @@ export const PaymentListContent = () => {
     return (
         <DragDropContext onDragEnd={onDragEnd}>
             <Box display="flex">
-                {dealStages.map(stage => (
+                {paymentStages.map(stage => (
                     <PaymentColumn
                         stage={stage.value}
-                        deals={dealsByStage[stage.value]}
+                        payments={paymentsByStage[stage.value]}
                         key={stage.value}
                     />
                 ))}
@@ -85,44 +85,44 @@ export const PaymentListContent = () => {
     );
 };
 
-const updateDealStageLocal = (
-    sourceDeal: Deal,
+const updatePaymentStageLocal = (
+    sourcePayment: Payment,
     source: { stage: string; index: number },
     destination: {
         stage: string;
         index?: number; // undefined if dropped after the last item
     },
-    dealsByStage: DealsByStage
+    paymentsByStage: PaymentsByStage
 ) => {
     if (source.stage === destination.stage) {
-        // moving deal inside the same column
-        const column = dealsByStage[source.stage];
+        // moving payment inside the same column
+        const column = paymentsByStage[source.stage];
         column.splice(source.index, 1);
-        column.splice(destination.index ?? column.length + 1, 0, sourceDeal);
+        column.splice(destination.index ?? column.length + 1, 0, sourcePayment);
         return {
-            ...dealsByStage,
+            ...paymentsByStage,
             [destination.stage]: column,
         };
     } else {
-        // moving deal across columns
-        const sourceColumn = dealsByStage[source.stage];
-        const destinationColumn = dealsByStage[destination.stage];
+        // moving payment across columns
+        const sourceColumn = paymentsByStage[source.stage];
+        const destinationColumn = paymentsByStage[destination.stage];
         sourceColumn.splice(source.index, 1);
         destinationColumn.splice(
             destination.index ?? destinationColumn.length + 1,
             0,
-            sourceDeal
+            sourcePayment
         );
         return {
-            ...dealsByStage,
+            ...paymentsByStage,
             [source.stage]: sourceColumn,
             [destination.stage]: destinationColumn,
         };
     }
 };
 
-const updateDealStage = async (
-    source: Deal,
+const updatePaymentStage = async (
+    source: Payment,
     destination: {
         stage: string;
         index?: number; // undefined if dropped after the last item
@@ -130,64 +130,64 @@ const updateDealStage = async (
     dataProvider: DataProvider
 ) => {
     if (source.stage === destination.stage) {
-        // moving deal inside the same column
-        // Fetch all the deals in this stage (because the list may be filtered, but we need to update even non-filtered deals)
-        const { data: columnDeals } = await dataProvider.getList('deals', {
+        // moving payment inside the same column
+        // Fetch all the payments in this stage (because the list may be filtered, but we need to update even non-filtered payments)
+        const { data: columnPayments } = await dataProvider.getList('payments', {
             sort: { field: 'index', order: 'ASC' },
             pagination: { page: 1, perPage: 100 },
             filter: { stage: source.stage },
         });
-        const destinationIndex = destination.index ?? columnDeals.length + 1;
+        const destinationIndex = destination.index ?? columnPayments.length + 1;
 
         if (source.index > destinationIndex) {
-            // deal moved up, eg
+            // payment moved up, eg
             // dest   src
             //  <------
             // [4, 7, 23, 5]
             await Promise.all([
-                // for all deals between destinationIndex and source.index, increase the index
-                ...columnDeals
+                // for all payments between destinationIndex and source.index, increase the index
+                ...columnPayments
                     .filter(
-                        deal =>
-                            deal.index >= destinationIndex &&
-                            deal.index < source.index
+                        payment =>
+                            payment.index >= destinationIndex &&
+                            payment.index < source.index
                     )
-                    .map(deal =>
-                        dataProvider.update('deals', {
-                            id: deal.id,
-                            data: { index: deal.index + 1 },
-                            previousData: deal,
+                    .map(payment =>
+                        dataProvider.update('payments', {
+                            id: payment.id,
+                            data: { index: payment.index + 1 },
+                            previousData: payment,
                         })
                     ),
-                // for the deal that was moved, update its index
-                dataProvider.update('deals', {
+                // for the payment that was moved, update its index
+                dataProvider.update('payments', {
                     id: source.id,
                     data: { index: destinationIndex },
                     previousData: source,
                 }),
             ]);
         } else {
-            // deal moved down, e.g
+            // payment moved down, e.g
             // src   dest
             //  ------>
             // [4, 7, 23, 5]
             await Promise.all([
-                // for all deals between source.index and destinationIndex, decrease the index
-                ...columnDeals
+                // for all payments between source.index and destinationIndex, decrease the index
+                ...columnPayments
                     .filter(
-                        deal =>
-                            deal.index <= destinationIndex &&
-                            deal.index > source.index
+                        payment =>
+                            payment.index <= destinationIndex &&
+                            payment.index > source.index
                     )
-                    .map(deal =>
-                        dataProvider.update('deals', {
-                            id: deal.id,
-                            data: { index: deal.index - 1 },
-                            previousData: deal,
+                    .map(payment =>
+                        dataProvider.update('payments', {
+                            id: payment.id,
+                            data: { index: payment.index - 1 },
+                            previousData: payment,
                         })
                     ),
-                // for the deal that was moved, update its index
-                dataProvider.update('deals', {
+                // for the payment that was moved, update its index
+                dataProvider.update('payments', {
                     id: source.id,
                     data: { index: destinationIndex },
                     previousData: source,
@@ -195,47 +195,47 @@ const updateDealStage = async (
             ]);
         }
     } else {
-        // moving deal across columns
-        // Fetch all the deals in both stages (because the list may be filtered, but we need to update even non-filtered deals)
-        const [{ data: sourceDeals }, { data: destinationDeals }] =
+        // moving payment across columns
+        // Fetch all the payments in both stages (because the list may be filtered, but we need to update even non-filtered payments)
+        const [{ data: sourcePayments }, { data: destinationPayments }] =
             await Promise.all([
-                dataProvider.getList('deals', {
+                dataProvider.getList('payments', {
                     sort: { field: 'index', order: 'ASC' },
                     pagination: { page: 1, perPage: 100 },
                     filter: { stage: source.stage },
                 }),
-                dataProvider.getList('deals', {
+                dataProvider.getList('payments', {
                     sort: { field: 'index', order: 'ASC' },
                     pagination: { page: 1, perPage: 100 },
                     filter: { stage: destination.stage },
                 }),
             ]);
         const destinationIndex =
-            destination.index ?? destinationDeals.length + 1;
+            destination.index ?? destinationPayments.length + 1;
 
         await Promise.all([
-            // decrease index on the deals after the source index in the source columns
-            ...sourceDeals
-                .filter(deal => deal.index > source.index)
-                .map(deal =>
-                    dataProvider.update('deals', {
-                        id: deal.id,
-                        data: { index: deal.index - 1 },
-                        previousData: deal,
+            // decrease index on the payments after the source index in the source columns
+            ...sourcePayments
+                .filter(payment => payment.index > source.index)
+                .map(payment =>
+                    dataProvider.update('payments', {
+                        id: payment.id,
+                        data: { index: payment.index - 1 },
+                        previousData: payment,
                     })
                 ),
-            // increase index on the deals after the destination index in the destination columns
-            ...destinationDeals
-                .filter(deal => deal.index >= destinationIndex)
-                .map(deal =>
-                    dataProvider.update('deals', {
-                        id: deal.id,
-                        data: { index: deal.index + 1 },
-                        previousData: deal,
+            // increase index on the payments after the destination index in the destination columns
+            ...destinationPayments
+                .filter(payment => payment.index >= destinationIndex)
+                .map(payment =>
+                    dataProvider.update('payments', {
+                        id: payment.id,
+                        data: { index: payment.index + 1 },
+                        previousData: payment,
                     })
                 ),
-            // change the dragged deal to take the destination index and column
-            dataProvider.update('deals', {
+            // change the dragged payment to take the destination index and column
+            dataProvider.update('payments', {
                 id: source.id,
                 data: {
                     index: destinationIndex,
