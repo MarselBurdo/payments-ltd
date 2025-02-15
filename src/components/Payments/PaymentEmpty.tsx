@@ -2,11 +2,11 @@ import { LinearProgress, Stack, Typography } from '@mui/material';
 import { CreateButton, useGetList } from 'react-admin';
 import useAppBarHeight from '../../misc/useAppBarHeight';
 import { matchPath, useLocation } from 'react-router';
-import { DealCreate } from './DealCreate';
+import { PaymentCreate } from './PaymentCreate';
 import { Contact } from '@/types';
 import { Link } from 'react-router-dom';
 
-export const DealEmpty = ({ children }: { children?: React.ReactNode }) => {
+export const PaymentEmpty = ({ children }: { children?: React.ReactNode }) => {
     const location = useLocation();
     const matchCreate = matchPath('/deals/create', location.pathname);
     const appbarHeight = useAppBarHeight();
@@ -49,7 +49,7 @@ export const DealEmpty = ({ children }: { children?: React.ReactNode }) => {
                     <Stack spacing={2} direction="row">
                         <CreateButton variant="contained" label="Create deal" />
                     </Stack>
-                    <DealCreate open={!!matchCreate} />
+                    <PaymentCreate open={!!matchCreate} />
                     {children}
                 </>
             ) : (

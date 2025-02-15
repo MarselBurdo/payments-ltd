@@ -20,7 +20,7 @@ const ListActions = () => (
 
 const paymentsFilters = [<SearchInput source="q" alwaysOn key="search-input-payments" />];
 
-export function PaymentsList() {
+export function PaymentsList1() {
   return (
     <List
       resource={'deals'}

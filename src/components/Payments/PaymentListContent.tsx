@@ -5,11 +5,11 @@ import { useEffect, useState } from 'react';
 import { DataProvider, useDataProvider, useListContext } from 'react-admin';
 
 import { Deal } from '@/types';
-import { DealColumn } from './DealColumn';
+import { PaymentColumn } from './PaymentColumn';
 import { DealsByStage, getDealsByStage } from './stages';
 import { useConfigurationContext } from '@/root/ConfigurationContext';
 
-export const DealListContent = () => {
+export const PaymentListContent = () => {
     const { dealStages } = useConfigurationContext();
     const { data: unorderedDeals, isPending, refetch } = useListContext<Deal>();
     const dataProvider = useDataProvider();
@@ -74,7 +74,7 @@ export const DealListContent = () => {
         <DragDropContext onDragEnd={onDragEnd}>
             <Box display="flex">
                 {dealStages.map(stage => (
-                    <DealColumn
+                    <PaymentColumn
                         stage={stage.value}
                         deals={dealsByStage[stage.value]}
                         key={stage.value}

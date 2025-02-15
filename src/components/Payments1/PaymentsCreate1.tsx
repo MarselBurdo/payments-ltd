@@ -7,7 +7,7 @@ import {
   required,
 } from 'react-admin';
 
-export const PaymentsCreate = () => (
+export const PaymentsCreate1 = () => (
   <Create>
     <SimpleForm>
       <TextInput source="name" validate={[required()]} />

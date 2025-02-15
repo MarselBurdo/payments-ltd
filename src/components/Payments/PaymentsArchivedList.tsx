@@ -9,11 +9,11 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useGetIdentity, useGetList } from 'react-admin';
-import { DealCardContent } from './DealCard';
+import { DealCardContent } from './PaymentCard';
 import { Deal } from '@/types';
 import { DialogCloseButton } from '@/misc/DialogCloseButton';
 
-export const DealArchivedList = () => {
+export const PaymentsArchivedList = () => {
     const { identity } = useGetIdentity();
     const {
         data: archivedLists,

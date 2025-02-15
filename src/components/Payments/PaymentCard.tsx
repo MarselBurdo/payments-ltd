@@ -4,7 +4,7 @@ import { ReferenceField, useRedirect } from 'react-admin';
 import { CompanyAvatar } from '../companies/CompanyAvatar';
 import { Deal } from '@/types';
 
-export const DealCard = ({ deal, index }: { deal: Deal; index: number }) => {
+export const PaymentCard = ({ deal, index }: { deal: Deal; index: number }) => {
     if (!deal) return null;
 
     return (

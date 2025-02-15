@@ -9,7 +9,7 @@ import { Db } from './types';
 import { randomDate } from './utils';
 import {faker} from "@/utils/fakerest/dataGenerator/companies";
 
-export const generateDeals = (db: Db): Deal[] => {
+export const generatePayments = (db: Db): Deal[] => {
     const deals = Array.from(Array(50).keys()).map(id => {
         const company = db.companies.at(faker.seed(54));
         company.nb_deals++;
@@ -31,7 +31,7 @@ export const generateDeals = (db: Db): Deal[] => {
             company_id: company.id,
             contact_ids: contacts.map(contact => contact.id),
             category: defaultDealCategories.at(faker.seed(5)),
-            stage: defaultDealStages.at(faker.seed(5)).value,
+            stage: defaultDealStages[Math.floor(Math.random() * defaultDealStages.length)].value,
             description: faker.lorem.paragraphs(faker.seed(4)),
             amount: faker.seed(1000) * 100000,
             created_at,

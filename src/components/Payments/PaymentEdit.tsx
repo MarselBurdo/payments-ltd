@@ -20,10 +20,10 @@ import {
 import { Link } from 'react-router-dom';
 import { DialogCloseButton } from '@/misc/DialogCloseButton';
 import { Deal } from '@/types';
-import { DealInputs } from './DealInputs';
+import { PaymentDealInputs } from './PaymentDealInputs';
 import { CompanyAvatar } from '../companies/CompanyAvatar';
 
-export const DealEdit = ({ open, id }: { open: boolean; id?: string }) => {
+export const PaymentEdit = ({ open, id }: { open: boolean; id?: string }) => {
     const redirect = useRedirect();
     const notify = useNotify();
 
@@ -68,7 +68,7 @@ export const DealEdit = ({ open, id }: { open: boolean; id?: string }) => {
                     <EditHeader />
                     <Form>
                         <DialogContent>
-                            <DealInputs />
+                            <PaymentDealInputs />
                         </DialogContent>
                         <EditToolbar />
                     </Form>

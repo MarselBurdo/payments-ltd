@@ -6,14 +6,12 @@ import { i18nProvider } from '@/118n';
 import { ClientsCreate } from '@/components/Clients/ClientsCreate';
 import { ClientsList } from '@/components/Clients/ClientsList';
 import { ClientsShow } from '@/components/Clients/ClientsShow';
-import { PaymentsCreate } from '@/components/Payments/PaymentsCreate';
-import { PaymentsList } from '@/components/Payments/PaymentsList';
-import { PaymentsView } from '@/components/Payments/PaymentsView';
+
 import { authProvider } from '@/utils/authProvider';
-import fakeDataProvider from '@/utils/fakeDataProvider';
+
 import {dataProvider} from "@/utils/fakerest";
 import Layout from "@/components/Layout/Layout";
-import deals from "@/components/Deals";
+import payments from "@/components/Payments";
 
 const MainApp = () => (
   <Admin
@@ -29,12 +27,12 @@ const MainApp = () => (
           //     key="deals"
           //     name="deals"
           //     recordRepresentation="id"
-          //     list={PaymentsList}
-          //     create={PaymentsCreate}
-          //     show={PaymentsView}
+          //     list={PaymentsList1}
+          //     create={PaymentsCreate1}
+          //     show={PaymentsView1}
           //     icon={PaymentsIcon}
           // />
-          <Resource name="deals" {...deals} />
+          <Resource name="payments" {...payments} />
       ),
       permissions === 'processor' && (
           <Resource

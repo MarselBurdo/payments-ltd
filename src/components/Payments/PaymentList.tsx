@@ -16,15 +16,15 @@ import { matchPath, useLocation } from 'react-router';
 
 import { Card, Stack } from '@mui/material';
 import { useConfigurationContext } from '@/root/ConfigurationContext';
-import { DealArchivedList } from './DealArchivedList';
-import { DealCreate } from './DealCreate';
-import { DealEdit } from './DealEdit';
-import { DealEmpty } from './DealEmpty';
-import { DealListContent } from './DealListContent';
-import { DealShow } from './DealShow';
+import { PaymentsArchivedList } from './PaymentsArchivedList';
+import { PaymentCreate } from './PaymentCreate';
+import { PaymentEdit } from './PaymentEdit';
+import { PaymentEmpty } from './PaymentEmpty';
+import { PaymentListContent } from './PaymentListContent';
+import { PaymentShow } from './PaymentShow';
 import { OnlyMineInput } from './OnlyMineInput';
 
-const DealList = () => {
+const PaymentList = () => {
     const { identity } = useGetIdentity();
 
     if (!identity) return null;
@@ -67,10 +67,10 @@ const DealLayout = () => {
     if (!data?.length && !hasFilters)
         return (
             <>
-                <DealEmpty>
-                    <DealShow open={!!matchShow} id={matchShow?.params.id} />
-                    <DealArchivedList />
-                </DealEmpty>
+                <PaymentEmpty>
+                    <PaymentShow open={!!matchShow} id={matchShow?.params.id} />
+                    <PaymentsArchivedList />
+                </PaymentEmpty>
             </>
         );
 
@@ -79,15 +79,15 @@ const DealLayout = () => {
             <Title title={'Deals'} />
             <ListToolbar filters={dealFilters} actions={<DealActions />} />
             <Card>
-                <DealListContent />
+                <PaymentListContent />
             </Card>
-            <DealArchivedList />
-            <DealCreate open={!!matchCreate} />
-            <DealEdit
+            <PaymentsArchivedList />
+            <PaymentCreate open={!!matchCreate} />
+            <PaymentEdit
                 open={!!matchEdit && !matchCreate}
                 id={matchEdit?.params.id}
             />
-            <DealShow open={!!matchShow} id={matchShow?.params.id} />
+            <PaymentShow open={!!matchShow} id={matchShow?.params.id} />
         </Stack>
     );
 };
@@ -106,4 +106,4 @@ const DealActions = () => {
     );
 };
 
-export default DealList;
+export default PaymentList;

@@ -32,9 +32,9 @@ import { DialogCloseButton } from '@/misc/DialogCloseButton';
 import { useConfigurationContext } from '@/root/ConfigurationContext';
 import { Deal } from '@/types';
 import { ContactList } from './ContactList';
-import { findDealLabel } from './deal';
+import { findDealLabel } from './payment';
 
-export const DealShow = ({ open, id }: { open: boolean; id?: string }) => {
+export const PaymentShow = ({ open, id }: { open: boolean; id?: string }) => {
     const redirect = useRedirect();
     const handleClose = () => {
         redirect('list', 'deals');

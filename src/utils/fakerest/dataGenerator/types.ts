@@ -13,7 +13,7 @@ export interface Db {
     companies: Required<Company>[];
     contacts: Required<Contact>[];
     contactNotes: ContactNote[];
-    deals: Deal[];
+    payments: Deal[];
     dealNotes: DealNote[];
     sales: Sale[];
     tags: Tag[];

@@ -29,7 +29,7 @@ import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { ActivityLog } from '../activity/ActivityLog';
 import { Avatar } from '../contacts/Avatar';
 import { TagsList } from '../contacts/TagsList';
-import { findDealLabel } from '../deals/deal';
+import { findDealLabel } from '../Payments/payment';
 import { Status } from '../misc/Status';
 import { useConfigurationContext } from '../root/ConfigurationContext';
 import { Company, Contact, Deal } from '../types';

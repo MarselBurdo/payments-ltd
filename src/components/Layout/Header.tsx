@@ -32,7 +32,7 @@ const Header = () => {
         currentPath = '/contacts';
     } else if (!!matchPath('/companies/*', location.pathname)) {
         currentPath = '/companies';
-    } else if (!!matchPath('/deals/*', location.pathname)) {
+    } else if (!!matchPath('/payments/*', location.pathname)) {
         currentPath = '/deals';
     } else {
         currentPath = false;
@@ -90,10 +90,10 @@ const Header = () => {
                                     value="/companies"
                                 />
                                 <Tab
-                                    label={'Deals'}
+                                    label={'Payments'}
                                     component={Link}
-                                    to="/deals"
-                                    value="/deals"
+                                    to="/payments"
+                                    value="/payments"
                                 />
                             </Tabs>
                         </Box>

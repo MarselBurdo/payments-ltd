@@ -1,6 +1,6 @@
 import { Show, SimpleShowLayout, TextField } from 'react-admin';
 
-export function PaymentsView() {
+export function PaymentsView1() {
   return (
     <Show>
       <SimpleShowLayout>

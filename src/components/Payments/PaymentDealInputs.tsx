@@ -24,7 +24,7 @@ import { contactInputText, contactOptionText } from '@/misc/ContactOption';
 
 const validateRequired = required();
 
-export const DealInputs = () => {
+export const PaymentDealInputs = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     return (

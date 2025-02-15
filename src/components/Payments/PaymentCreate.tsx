@@ -13,9 +13,9 @@ import {
 } from 'react-admin';
 import { DialogCloseButton } from '@/misc/DialogCloseButton';
 import { Deal } from '@/types';
-import { DealInputs } from './DealInputs';
+import { PaymentDealInputs } from './PaymentDealInputs';
 
-export const DealCreate = ({ open }: { open: boolean }) => {
+export const PaymentCreate = ({ open }: { open: boolean }) => {
     const redirect = useRedirect();
     const dataProvider = useDataProvider();
     const { data: allDeals } = useListContext<Deal>();
@@ -95,7 +95,7 @@ export const DealCreate = ({ open }: { open: boolean }) => {
                     }}
                 >
                     <DialogContent>
-                        <DealInputs />
+                        <PaymentDealInputs />
                     </DialogContent>
                     <Toolbar>
                         <SaveButton />

@@ -2,11 +2,11 @@ import { Droppable } from '@hello-pangea/dnd';
 import { Box, Stack, Typography } from '@mui/material';
 
 import { Deal } from '@/types';
-import { DealCard } from './DealCard';
+import { PaymentCard } from './PaymentCard';
 import { useConfigurationContext } from '@/root/ConfigurationContext';
-import { findDealLabel } from './deal';
+import { findDealLabel } from './payment';
 
-export const DealColumn = ({
+export const PaymentColumn = ({
     stage,
     deals,
 }: {
@@ -70,7 +70,7 @@ export const DealColumn = ({
                         }}
                     >
                         {deals.map((deal, index) => (
-                            <DealCard key={deal.id} deal={deal} index={index} />
+                            <PaymentCard key={deal.id} deal={deal} index={index} />
                         ))}
                         {droppableProvided.placeholder}
                     </Box>
