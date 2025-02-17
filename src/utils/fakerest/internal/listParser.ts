@@ -11,38 +11,38 @@ export const LIST_REGEX_BASE = `(${UNQUOTED_ALLOWED_CHARS}|"${QUOTED_ALLOWED_CHA
  * e.g "a",b
  */
 export function parseList(list: string) {
-    const parsedItems = [];
+  const parsedItems = [];
 
-    let currentItem = '';
-    let currentQuoted = false;
-    for (const char of list) {
-        if (char === ',') {
-            if (currentQuoted) {
-                currentItem += char;
-                continue;
-            }
-
-            parsedItems.push(currentItem);
-            currentItem = '';
-            continue;
-        }
-
-        if (char === '"') {
-            currentQuoted = !currentQuoted;
-            continue;
-        }
-
+  let currentItem = '';
+  let currentQuoted = false;
+  for (const char of list) {
+    if (char === ',') {
+      if (currentQuoted) {
         currentItem += char;
-    }
-    if (currentItem) {
-        parsedItems.push(currentItem);
+        continue;
+      }
+
+      parsedItems.push(currentItem);
+      currentItem = '';
+      continue;
     }
 
-    return parsedItems.map((v: string) => {
-        const parsedFloat = Number.parseFloat(v);
-        if (!Number.isNaN(parsedFloat)) {
-            return parsedFloat;
-        }
-        return v;
-    });
+    if (char === '"') {
+      currentQuoted = !currentQuoted;
+      continue;
+    }
+
+    currentItem += char;
+  }
+  if (currentItem) {
+    parsedItems.push(currentItem);
+  }
+
+  return parsedItems.map((v: string) => {
+    const parsedFloat = Number.parseFloat(v);
+    if (!Number.isNaN(parsedFloat)) {
+      return parsedFloat;
+    }
+    return v;
+  });
 }

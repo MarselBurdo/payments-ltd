@@ -18,7 +18,9 @@ const ListActions = () => (
   </TopToolbar>
 );
 
-const clientsFilters = [<SearchInput source="q" alwaysOn key="search-input-clients"/>];
+const clientsFilters = [
+  <SearchInput source="q" alwaysOn key="search-input-clients" />,
+];
 
 export function ClientsList() {
   return (

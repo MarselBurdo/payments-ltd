@@ -5,9 +5,9 @@ import { SalesEdit } from './SalesEdit';
 import { SalesList } from './SalesList';
 
 export default {
-    list: SalesList,
-    create: SalesCreate,
-    edit: SalesEdit,
-    recordRepresentation: (record: Sale) =>
-        `${record.first_name} ${record.last_name}`,
+  list: SalesList,
+  create: SalesCreate,
+  edit: SalesEdit,
+  recordRepresentation: (record: Sale) =>
+    `${record.first_name} ${record.last_name}`,
 };

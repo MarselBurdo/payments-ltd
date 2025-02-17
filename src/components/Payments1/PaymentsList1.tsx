@@ -18,22 +18,24 @@ const ListActions = () => (
   </TopToolbar>
 );
 
-const paymentsFilters = [<SearchInput source="q" alwaysOn key="search-input-payments" />];
+const paymentsFilters = [
+  <SearchInput source="q" alwaysOn key="search-input-payments" />,
+];
 
 export function PaymentsList1() {
   return (
     <List
-      resource={'deals'}
+      resource={'payments'}
       pagination={<Pagination rowsPerPageOptions={[10, 25, 50, 100]} />}
       perPage={10}
       actions={<ListActions />}
       filters={paymentsFilters}
-      key={'deals.dataGrid.list'}
+      key={'payments.dataGrid.list'}
     >
       <DatagridConfigurable preferenceKey={'payments.dataGrid'}>
-        <TextField source="name"/>
-        <TextField source="amount"/>
-        <TextField source="status"/>
+        <TextField source="name" />
+        <TextField source="amount" />
+        <TextField source="status" />
         <TextField source="description" />
       </DatagridConfigurable>
     </List>
