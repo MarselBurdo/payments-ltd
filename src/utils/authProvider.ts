@@ -43,5 +43,4 @@ export const authProvider = {
     const role = localStorage.getItem('role');
     return role ? Promise.resolve(role) : Promise.reject();
   },
-
 };

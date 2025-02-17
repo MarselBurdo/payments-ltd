@@ -8,6 +8,8 @@ import {
   SelectColumnsButton,
   TextField,
   TopToolbar,
+  ChipField,
+  DateField
 } from 'react-admin';
 
 const ListActions = () => (
@@ -18,9 +20,11 @@ const ListActions = () => (
   </TopToolbar>
 );
 
-const paymentsFilters = [<SearchInput source="q" alwaysOn key="search-input-payments" />];
+const paymentsFilters = [
+  <SearchInput source="q" alwaysOn key="search-input-payments" />,
+];
 
-export function PaymentsList() {
+export function PaymentsList1() {
   return (
     <List
       resource={'payments'}
@@ -31,9 +35,12 @@ export function PaymentsList() {
       key={'payments.dataGrid.list'}
     >
       <DatagridConfigurable preferenceKey={'payments.dataGrid'}>
-        <TextField source="name"/>
-        <TextField source="amount"/>
-        <TextField source="status"/>
+        <TextField source="name" />
+        <TextField source="category" />
+        <ChipField source="stage" variant={'outline'}/>
+        <TextField source="amount" />
+        <DateField source="created_at"  label={'Create(date)'} locales={'ru'}/>
+        <DateField source="updated_at" label={'Done(date)'} locales={'ru'}/>
         <TextField source="description" />
       </DatagridConfigurable>
     </List>

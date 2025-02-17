@@ -1,49 +1,36 @@
-import AssuredWorkloadIcon from '@mui/icons-material/AssuredWorkload';
-import PaymentsIcon from '@mui/icons-material/Payments';
 import { Admin, Resource } from 'react-admin';
 
 import { i18nProvider } from '@/118n';
-import { ClientsCreate } from '@/components/Clients/ClientsCreate';
-import { ClientsList } from '@/components/Clients/ClientsList';
-import { ClientsShow } from '@/components/Clients/ClientsShow';
-import { PaymentsCreate } from '@/components/Payments/PaymentsCreate';
-import { PaymentsList } from '@/components/Payments/PaymentsList';
-import { PaymentsView } from '@/components/Payments/PaymentsView';
+import companies from '@/components/Companies';
+import contacts from '@/components/Contacts';
+import Layout from '@/components/Layout/Layout';
+import payments from '@/components/Payments';
 import { authProvider } from '@/utils/authProvider';
-import fakeDataProvider from '@/utils/fakeDataProvider';
+import { dataProvider } from '@/utils/fakerest';
+import {useEffect} from "react";
+import '../../styles/globals.css'
 
-const MainApp = () => (
-  <Admin
-    dataProvider={fakeDataProvider}
-    i18nProvider={i18nProvider}
-    authProvider={authProvider}
-    getPermissions={authProvider.getPermissions}
-  >
-    {(permissions) => [
-      (permissions === 'processor' || permissions === 'client') && (
-          <Resource
-              key="payments"
-              name="payments"
-              recordRepresentation="id"
-              list={PaymentsList}
-              create={PaymentsCreate}
-              show={PaymentsView}
-              icon={PaymentsIcon}
-          />
-      ),
-      permissions === 'processor' && (
-          <Resource
-              key="clients"
-              name="clients"
-              recordRepresentation="title"
-              list={ClientsList}
-              create={ClientsCreate}
-              show={ClientsShow}
-              icon={AssuredWorkloadIcon}
-          />
-      ),
-    ]}
-  </Admin>
-);
+const MainApp = () => {
+  return (
+      <Admin
+          dataProvider={dataProvider}
+          i18nProvider={i18nProvider}
+          authProvider={authProvider}
+          getPermissions={authProvider.getPermissions}
+          layout={Layout}
+      >
+        {permissions => [
+          (permissions === 'processor' || permissions === 'client') && (
+              <Resource name="payments" {...payments} />
+          ),
+          permissions === 'processor' && (<>
+                <Resource name="companies" {...companies} />
+                <Resource name="contacts" {...contacts} />
+              </>
+          ),
+        ]}
+      </Admin>
+  )
+};
 
 export default MainApp;
