@@ -14,11 +14,11 @@ const generateName=()=>{
   return faker.lorem.words()
 }
 
-const paymentWithName= Array.from({length:100},()=>generateName())
+const paymentWithName= Array.from({length:200},()=>generateName())
 
 export const generatePayments = (db: Db): Payment[] => {
   const payments = paymentWithName.map((name,id) => {
-    const company = db.companies[Math.floor(Math.random()*53)]
+    const company = db.companies[Math.floor(Math.random()*db.companies.length)]
     company.nb_deals++;
     const contacts = db.contacts.filter(
       contact => contact.company_id === company.id
@@ -42,7 +42,7 @@ export const generatePayments = (db: Db): Payment[] => {
       description: faker.lorem.paragraphs(Math.floor(Math.random() * 4)),
       amount: Math.floor(Math.random() * 100000000),
       created_at,
-      updated_at: randomDate(new Date(created_at)).toString(),
+      updated_at: randomDate(new Date(created_at), new Date(Date.now() + 864000000)),
       expected_closing_date,
       index: 0,
     };

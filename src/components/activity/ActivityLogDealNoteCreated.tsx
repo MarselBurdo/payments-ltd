@@ -17,7 +17,7 @@ export function ActivityLogDealNoteCreated({
   activity,
 }: ActivityLogDealNoteCreatedProps) {
   const context = useActivityLogContext();
-  const { dealNote } = activity;
+  const { paymentNote } = activity;
   return (
     <ActivityLogNote
       header={
@@ -25,7 +25,7 @@ export function ActivityLogDealNoteCreated({
           <ReferenceField
             source="deal_id"
             reference="payments"
-            record={dealNote}
+            record={paymentNote}
             link={false}
           >
             <ReferenceField
@@ -54,7 +54,7 @@ export function ActivityLogDealNoteCreated({
             <ReferenceField
               source="deal_id"
               reference="payments"
-              record={dealNote}
+              record={paymentNote}
               link="show"
             />
             {context !== 'company' && (
@@ -63,7 +63,7 @@ export function ActivityLogDealNoteCreated({
                 <ReferenceField
                   source="deal_id"
                   reference="payments"
-                  record={dealNote}
+                  record={paymentNote}
                   link={false}
                 >
                   <ReferenceField
@@ -83,7 +83,7 @@ export function ActivityLogDealNoteCreated({
           )}
         </>
       }
-      text={dealNote.text}
+      text={paymentNote.text}
     />
   );
 }

@@ -14,13 +14,13 @@ import { Db } from './types';
 
 export default (): Db => {
   const db = {} as Db;
-  db.sales = generateSales(db);
+  db.sales = generateUsers(db);
   db.tags = generateTags(db);
   db.companies = generateCompanies(db);
   db.contacts = generateContacts(db);
   db.contactNotes = generateContactNotes(db);
   db.payments = generatePayments(db);
-  db.dealNotes = generateDealNotes(db);
+  db.paymentNotes = generateDealNotes(db);
   db.tasks = generateTasks(db);
   db.users = generateUsers(db);
   finalize(db);

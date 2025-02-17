@@ -12,7 +12,7 @@ import {
   Company,
   Contact,
   ContactNote,
-  DealNote,
+  PaymentNote,
   Payment,
 } from '@/types';
 
@@ -144,8 +144,8 @@ async function getNewDealsAndNotes(
     recentDealNotesFilter['deal_id@in'] = `(${dealIds})`;
   }
 
-  const { data: dealNotes } = await dataProvider.getList<DealNote>(
-    'dealNotes',
+  const { data: paymentNotes } = await dataProvider.getList<PaymentNote>(
+    'paymentNotes',
     {
       filter: recentDealNotesFilter,
       pagination: { page: 1, perPage: 250 },
@@ -162,12 +162,12 @@ async function getNewDealsAndNotes(
     date: deal.created_at,
   }));
 
-  const newDealNotes = dealNotes.map(dealNote => ({
-    id: `dealNote.${dealNote.id}.created`,
+  const newDealNotes = paymentNotes.map(paymentNote => ({
+    id: `paymentNote.${paymentNote.id}.created`,
     type: DEAL_NOTE_CREATED,
-    sales_id: dealNote.sales_id,
-    dealNote,
-    date: dealNote.date,
+    sales_id: paymentNote.sales_id,
+    paymentNote,
+    date: paymentNote.date,
   }));
 
   return [...newDeals, ...newDealNotes];

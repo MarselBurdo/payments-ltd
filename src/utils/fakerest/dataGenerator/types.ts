@@ -2,9 +2,8 @@ import {
   Company,
   Contact,
   ContactNote,
-  DealNote,
+  PaymentNote,
   Payment,
-  Sale,
   Tag,
   Task,
   User,
@@ -15,8 +14,8 @@ export interface Db {
   contacts: Required<Contact>[];
   contactNotes: ContactNote[];
   payments: Payment[];
-  dealNotes: DealNote[];
-  sales: Sale[];
+  paymentNotes: PaymentNote[];
+  sales: User[];
   tags: Tag[];
   tasks: Task[];
   users: User[];

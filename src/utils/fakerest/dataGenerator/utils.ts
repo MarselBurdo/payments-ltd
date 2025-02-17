@@ -13,7 +13,7 @@ export const randomDate = (minDate?: Date, maxDate?: Date) => {
       : Date.now() - 5 * 365 * 24 * 60 * 60 * 1000; // 5 years
   const maxTs = maxDate instanceof Date ? maxDate.getTime() : Date.now();
   const range = maxTs - minTs;
-  const randomRange = faker.seed(range);
+  const randomRange = Math.floor(Math.random()*range);
   // move it more towards today to account for traffic increase
   const ts = Math.sqrt(randomRange / range) * range;
   return new Date(minTs + ts);

@@ -141,7 +141,7 @@ const ContextInfo = ({ record }: { record: Company }) => {
           gutterBottom
         >
           Tax Identifier:{' '}
-          <TextField source="tax_identifier" color="textPrimary" />
+          {/*<TextField source="tax_identifier" color="textPrimary" />*/}
         </Typography>
       )}
     </Stack>

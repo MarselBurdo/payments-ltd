@@ -23,7 +23,7 @@ export function withSupabaseFilterAdapter<T extends DataProvider>(
       });
     },
     getMany(resource, params) {
-      return dataProvider.getMany(removeSummarySuffix(resource), params);
+      return dataProvider?.getMany(removeSummarySuffix(resource), params);
     },
     getManyReference(resource, params) {
       return dataProvider.getManyReference(removeSummarySuffix(resource), {
@@ -32,7 +32,7 @@ export function withSupabaseFilterAdapter<T extends DataProvider>(
       });
     },
     create(resource, params) {
-      return dataProvider.create(removeSummarySuffix(resource), params);
+      return dataProvider.create(removeSummarySuffix(resource), {id:Math.random(),...params});
     },
     delete(resource, params) {
       return dataProvider.delete(removeSummarySuffix(resource), params);

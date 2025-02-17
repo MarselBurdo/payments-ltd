@@ -97,13 +97,13 @@ const Header = () => {
                             </Tabs>
                         </Box>
                         <Box display="flex" alignItems="center">
-                            <LocalesMenuButton/>
-                            <LoadingIndicator/>
+                            {/*<LocalesMenuButton/>*/}
+                            {/*<LoadingIndicator/>*/}
                             <UserMenu>
-                                <ConfigurationMenu/>
-                                <CanAccess resource="sales" action="list">
-                                    <UsersMenu/>
-                                </CanAccess>
+                                {/*<ConfigurationMenu/>*/}
+                                {/*<CanAccess resource="sales" action="list">*/}
+                                {/*    <UsersMenu/>*/}
+                                {/*</CanAccess>*/}
                                 <Logout/>
                             </UserMenu>
                         </Box>

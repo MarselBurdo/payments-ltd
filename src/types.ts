@@ -123,7 +123,7 @@ export type Payment = {
   index: number;
 } & Pick<RaRecord, 'id'>;
 
-export type DealNote = {
+export type PaymentNote = {
   deal_id: Identifier;
   text: string;
   date: string;

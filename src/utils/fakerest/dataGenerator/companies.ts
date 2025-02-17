@@ -14,7 +14,7 @@ function generateRandomCompanyName() {
   return faker.company.name();
 }
 
-const companyNames = Array.from({ length: 58 }, () =>
+const companyNames = Array.from({ length: 100 }, () =>
   generateRandomCompanyName()
 );
 

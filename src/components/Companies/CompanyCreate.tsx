@@ -1,12 +1,11 @@
 import * as React from 'react';
 
 import { CardContent } from '@mui/material';
-import { Create, Form, Toolbar, useGetIdentity } from 'react-admin';
+import { Create, Form, Toolbar } from 'react-admin';
 
 import { CompanyInputs } from './CompanyInputs';
 
 export const CompanyCreate = () => {
-  const { identity } = useGetIdentity();
   return (
     <Create
       actions={false}
@@ -19,7 +18,7 @@ export const CompanyCreate = () => {
         return values;
       }}
     >
-      <Form defaultValues={{ sales_id: identity?.id }}>
+      <Form defaultValues={{ sales_id: 1 }}>
         <CardContent>
           <CompanyInputs />
         </CardContent>

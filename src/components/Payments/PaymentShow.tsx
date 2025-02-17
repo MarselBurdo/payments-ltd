@@ -67,7 +67,7 @@ export const PaymentShow = ({ open, id }: { open: boolean; id?: string }) => {
 const CLOSE_TOP_WITH_ARCHIVED = 14;
 const DealShowContent = ({ handleClose }: { handleClose: () => void }) => {
   const { paymentStages } = useConfigurationContext();
-  const record = useRecordContext<Deal>();
+  const record = useRecordContext<Payment>();
   if (!record) return null;
 
   return (
@@ -102,7 +102,7 @@ const DealShowContent = ({ handleClose }: { handleClose: () => void }) => {
                   </>
                 ) : (
                   <>
-                    <ArchiveButton record={record} />
+                    {/*<ArchiveButton record={record} />*/}
                     <EditButton scrollToTop={false} />
                   </>
                 )}
@@ -225,7 +225,7 @@ const ArchivedTitle = () => (
   </Box>
 );
 
-const ArchiveButton = ({ record }: { record: Deal }) => {
+const ArchiveButton = ({ record }: { record: Payment }) => {
   const [update] = useUpdate();
   const redirect = useRedirect();
   const notify = useNotify();
@@ -258,7 +258,7 @@ const ArchiveButton = ({ record }: { record: Deal }) => {
   );
 };
 
-const UnarchiveButton = ({ record }: { record: Deal }) => {
+const UnarchiveButton = ({ record }: { record: Payment }) => {
   const dataProvider = useDataProvider();
   const redirect = useRedirect();
   const notify = useNotify();
@@ -268,7 +268,7 @@ const UnarchiveButton = ({ record }: { record: Deal }) => {
     mutationFn: () => dataProvider.unarchiveDeal(record),
     onSuccess: () => {
       redirect('list', 'payments');
-      notify('Deal unarchived', {
+      notify('Payment unarchived', {
         type: 'info',
         undoable: false,
       });

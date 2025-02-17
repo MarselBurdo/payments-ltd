@@ -163,7 +163,7 @@ export const CRM = ({
       <Resource name="contacts" {...contacts} />
       <Resource name="companies" {...companies} />
       <Resource name="contactNotes" />
-      <Resource name="dealNotes" />
+      <Resource name="paymentNotes" />
       <Resource name="tasks" list={ListGuesser} />
       <Resource name="sales" {...sales} />
       <Resource name="tags" list={ListGuesser} />

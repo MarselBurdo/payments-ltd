@@ -20,7 +20,7 @@ import { PaymentInputs } from './PaymentDealInputs';
 export const PaymentCreate = ({ open }: { open: boolean }) => {
   const redirect = useRedirect();
   const dataProvider = useDataProvider();
-  const { data: allDeals } = useListContext<Payment>();
+  const { data: allPayments } = useListContext<Payment>();
 
   const handleClose = () => {
     redirect('/payments');
