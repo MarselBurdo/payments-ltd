@@ -4,7 +4,7 @@ import { Link, ReferenceField } from 'react-admin';
 import { RelativeDate } from '@/misc/RelativeDate';
 import type { ActivityCompanyCreated } from '@/types';
 
-import { CompanyAvatar } from '../companies/CompanyAvatar';
+import { CompanyAvatar } from '../Companies/CompanyAvatar';
 import { SaleName } from '../sales/SaleName';
 import { useActivityLogContext } from './ActivityLogContext';
 

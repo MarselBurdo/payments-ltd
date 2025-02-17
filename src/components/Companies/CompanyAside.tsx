@@ -13,7 +13,7 @@ import {
   useRecordContext,
 } from 'react-admin';
 
-import { Company } from '../types';
+import { Company } from '@/types';
 import { sizes } from './sizes';
 
 interface CompanyAsideProps {
@@ -193,7 +193,7 @@ const AdditionalInfo = ({ record }: { record: Company }) => {
         <Stack>
           {record.context_links.map((link, index) =>
             link ? (
-              <Tooltip title={link}>
+              <Tooltip title={link} key={index}>
                 <Typography
                   key={index}
                   variant="body2"
