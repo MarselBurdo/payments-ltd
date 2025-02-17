@@ -132,7 +132,8 @@ const ContactsIterator = () => {
 
   if (isPending || error) return null;
 
-  const now = Date.now();
+  const now = new Date();
+  const yesterday =  new Date(Date.now() - 86400000);
   return (
     <List dense sx={{ pt: 0 }}>
       {contacts.map(contact => (
@@ -168,7 +169,7 @@ const ContactsIterator = () => {
                     color="textSecondary"
                     component="span"
                   >
-                    last activity {formatDistance(contact.last_seen, now)} ago{' '}
+                    last activity {formatDistance(yesterday, now)} ago{' '}
                     <Status status={contact.status} />
                   </Typography>
                 </ListItemSecondaryAction>
@@ -199,10 +200,11 @@ const CreateRelatedContactButton = () => {
 
 const PaymentsIterator = () => {
   const { data: payments, error, isPending } = useListContext<Payment>();
-  const { dealStages } = useConfigurationContext();
+  const { paymentStages } = useConfigurationContext();
   if (isPending || error) return null;
 
-  const now = Date.now();
+  const now = new Date();
+  const yesterday =  new Date(Date.now() - 86400000);
   return (
     <Box>
       <List dense>
@@ -216,7 +218,7 @@ const PaymentsIterator = () => {
                 primary={deal.name}
                 secondary={
                   <>
-                    {findPaymentLabel(dealStages, deal.stage)},{' '}
+                    {findPaymentLabel(paymentStages, deal.stage)},{' '}
                     {deal.amount.toLocaleString('en-US', {
                       notation: 'compact',
                       style: 'currency',
@@ -234,7 +236,7 @@ const PaymentsIterator = () => {
                   color="textSecondary"
                   component="span"
                 >
-                  last activity {formatDistance(deal.updated_at, now)} ago{' '}
+                  last activity {formatDistance(yesterday, now)} ago{' '}
                 </Typography>
               </ListItemSecondaryAction>
             </ListItemButton>

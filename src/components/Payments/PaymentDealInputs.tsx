@@ -35,7 +35,7 @@ export const PaymentInputs = () => {
       <Stack gap={4} flexDirection={isMobile ? 'column' : 'row'}>
         <DealLinkedToInputs />
         <Divider orientation={isMobile ? 'horizontal' : 'vertical'} flexItem />
-        <DealMiscInputs />
+        <PaymentMiscInputs />
       </Stack>
     </Stack>
   );
@@ -46,7 +46,7 @@ const DealInfoInputs = () => {
     <Stack gap={1} flex={1}>
       <TextInput
         source="name"
-        label="Deal name"
+        label="Payment name"
         validate={validateRequired}
         helperText={false}
       />
@@ -105,8 +105,8 @@ const DealLinkedToInputs = () => {
   );
 };
 
-const DealMiscInputs = () => {
-  const { dealStages, dealCategories } = useConfigurationContext();
+const PaymentMiscInputs = () => {
+  const { paymentStages, paymentCategories } = useConfigurationContext();
   return (
     <Stack gap={1} flex={1}>
       <Typography variant="subtitle1">Misc</Typography>
@@ -114,7 +114,7 @@ const DealMiscInputs = () => {
       <SelectInput
         source="category"
         label="Category"
-        choices={dealCategories.map(type => ({
+        choices={paymentCategories.map(type => ({
           id: type,
           name: type,
         }))}
@@ -136,7 +136,7 @@ const DealMiscInputs = () => {
       />
       <SelectInput
         source="stage"
-        choices={dealStages.map(stage => ({
+        choices={paymentStages.map(stage => ({
           id: stage.value,
           name: stage.label,
         }))}

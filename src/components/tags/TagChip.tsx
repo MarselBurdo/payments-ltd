@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Chip } from '@mui/material';
 
-import { Tag } from '../types';
+import { Tag } from '@/types';
 import { TagEditModal } from './TagEditModal';
 
 type TagChipProps = {

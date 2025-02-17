@@ -20,11 +20,12 @@ const MainApp = () => (
       (permissions === 'processor' || permissions === 'client') && (
         <Resource name="payments" {...payments} />
       ),
-      permissions === 'processor' && (
+      permissions === 'processor' && (<>
         <Resource name="companies" {...companies} />
+            <Resource name="contacts" {...contacts} />
+      </>
       ),
     ]}
-    <Resource name="contacts" {...contacts} />
   </Admin>
 );
 

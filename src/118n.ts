@@ -37,6 +37,8 @@ const translations = {
           amount: 'Сумма',
           status: 'Статус',
           description: 'Описание',
+          stage:'Статус',
+          category:'Категория'
         },
       },
       clients: {
@@ -50,6 +52,7 @@ const translations = {
           inn: 'ИНН',
         },
       },
+
     },
   },
 };

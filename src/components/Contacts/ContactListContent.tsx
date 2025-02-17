@@ -12,7 +12,6 @@ import {
   Typography,
   useMediaQuery,
 } from '@mui/material';
-import { formatRelative } from 'date-fns';
 import {
   RecordContextProvider,
   ReferenceField,

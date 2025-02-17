@@ -8,6 +8,7 @@ import {
   SelectColumnsButton,
   TextField,
   TopToolbar,
+  ChipField
 } from 'react-admin';
 
 const ListActions = () => (
@@ -34,8 +35,9 @@ export function PaymentsList1() {
     >
       <DatagridConfigurable preferenceKey={'payments.dataGrid'}>
         <TextField source="name" />
+        <TextField source="category" />
+        <ChipField source="stage" variant={'outline'}/>
         <TextField source="amount" />
-        <TextField source="status" />
         <TextField source="description" />
       </DatagridConfigurable>
     </List>

@@ -10,33 +10,37 @@ import { faker } from '@/utils/fakerest/dataGenerator/companies';
 import { Db } from './types';
 import { randomDate } from './utils';
 
+const generateName=()=>{
+  return faker.lorem.words()
+}
+
+const paymentWithName= Array.from({length:100},()=>generateName())
+
 export const generatePayments = (db: Db): Payment[] => {
-  const payments = Array.from(Array(50).keys()).map(id => {
-    const company = db.companies.at(faker.seed(54));
+  const payments = paymentWithName.map((name,id) => {
+    const company = db.companies.at(Math.floor(Math.random()*53));
     company.nb_deals++;
     const contacts = db.contacts.filter(
       contact => contact.company_id === company.id
     );
-    const lowercaseName = faker.lorem.words();
     const created_at = randomDate(new Date(company.created_at)).toISOString();
 
     const expected_closing_date = randomDate(
       new Date(created_at),
       add(new Date(created_at), { months: 6 })
     ).toISOString();
-
     return {
       id,
-      name: lowercaseName[0].toUpperCase() + lowercaseName.slice(1),
+      name: name[0].toUpperCase() + name.slice(1),
       company_id: company.id,
       contact_ids: contacts.map(contact => contact.id),
-      category: defaultPaymentCategories.at(faker.seed(5)),
+      category: defaultPaymentCategories[Math.floor(Math.random() * defaultPaymentCategories.length)],
       stage:
         defaultPaymentStages[
           Math.floor(Math.random() * defaultPaymentStages.length)
         ].value,
-      description: faker.lorem.paragraphs(faker.seed(4)),
-      amount: faker.seed(1000) * 100000,
+      description: faker.lorem.paragraphs(Math.floor(Math.random() * 4)),
+      amount: Math.floor(Math.random() * 100000000),
       created_at,
       updated_at: randomDate(new Date(created_at)).toString(),
       expected_closing_date,
