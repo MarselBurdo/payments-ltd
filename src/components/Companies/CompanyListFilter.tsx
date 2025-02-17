@@ -46,15 +46,6 @@ export const CompanyListFilter = () => {
           />
         ))}
       </FilterList>
-
-      <FilterList label="Account manager" icon={<SupervisorAccountIcon />}>
-        <FilterListItem
-          label="Me"
-          value={{
-            sales_id: identity?.id,
-          }}
-        />
-      </FilterList>
     </Box>
   );
 };

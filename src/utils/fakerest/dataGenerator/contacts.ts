@@ -46,7 +46,7 @@ export const generateContacts = (db: Db): Required<Contact>[] => {
     // choose company with people left to know
     let company: Required<Company>;
     do {
-      company = db.companies.at(faker.seed(54));
+      company = db.companies[Math.floor(Math.random()*53)];
     } while (company.nb_contacts >= maxContacts[company.size]);
     company.nb_contacts++;
 
@@ -72,8 +72,8 @@ export const generateContacts = (db: Db): Required<Contact>[] => {
       first_seen: first_seen,
       last_seen: last_seen,
       has_newsletter: weightedBoolean(30),
-      status: defaultNoteStatuses.at(faker.seed(3)).value,
-      tags: db.tags.map(tag => tag.id),
+      status: defaultNoteStatuses[Math.floor(Math.random()*defaultNoteStatuses.length)].value,
+      tags: [db.tags[Math.floor(Math.random()*db.tags.length)]].map(tag=>tag.id),
       nb_tasks: 0,
       linkedin_url: null,
     };

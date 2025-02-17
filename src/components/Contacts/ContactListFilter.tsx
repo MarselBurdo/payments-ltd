@@ -109,15 +109,15 @@ export const ContactListFilter = () => {
             />
           ))}
       </FilterList>
-      <FilterList label="Tasks" icon={<AssignmentTurnedInIcon />}>
-        <FilterListItem
-          label="With pending tasks"
-          value={{ 'nb_tasks@gt': 0 }}
-        />
-      </FilterList>
-      <FilterList label="Account manager" icon={<SupervisorAccountIcon />}>
-        <FilterListItem label="Me" value={{ sales_id: identity?.id }} />
-      </FilterList>
+      {/*<FilterList label="Tasks" icon={<AssignmentTurnedInIcon />}>*/}
+      {/*  <FilterListItem*/}
+      {/*    label="With pending tasks"*/}
+      {/*    value={{ 'nb_tasks@gt': 0 }}*/}
+      {/*  />*/}
+      {/*</FilterList>*/}
+      {/*<FilterList label="Account manager" icon={<SupervisorAccountIcon />}>*/}
+      {/*  <FilterListItem label="Me" value={{ sales_id: identity?.id }} />*/}
+      {/*</FilterList>*/}
     </Box>
   );
 };

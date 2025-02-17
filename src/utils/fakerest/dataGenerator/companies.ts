@@ -4,6 +4,7 @@ import { Company, RAFile } from '@/types';
 
 import { Db } from './types';
 import { randomDate } from './utils';
+import {defaultCompanySectors} from "@/root/defaultConfiguration";
 
 const regex = /\W+/;
 
@@ -31,7 +32,8 @@ export const generateCompanies = (db: Db): Partial<Company>[] => {
       linkedin_url: `https://www.linkedin.com/company/${name
         .toLowerCase()
         .replace(regex, '_')}`,
-      // website: faker.internet.url(),
+      size:[1,10,50,250,500].at(Math.floor(Math.random()*5)) as 1|10|50|250|500,
+      sector:defaultCompanySectors[Math.floor(Math.random()*defaultCompanySectors.length)],
       phone_number: faker.phone.number(),
       address: faker.location.streetAddress(),
       zipcode: faker.location.zipCode(),

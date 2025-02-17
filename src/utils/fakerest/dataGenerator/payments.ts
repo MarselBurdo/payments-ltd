@@ -18,7 +18,7 @@ const paymentWithName= Array.from({length:100},()=>generateName())
 
 export const generatePayments = (db: Db): Payment[] => {
   const payments = paymentWithName.map((name,id) => {
-    const company = db.companies.at(Math.floor(Math.random()*53));
+    const company = db.companies[Math.floor(Math.random()*53)]
     company.nb_deals++;
     const contacts = db.contacts.filter(
       contact => contact.company_id === company.id

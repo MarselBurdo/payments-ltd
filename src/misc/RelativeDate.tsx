@@ -1,5 +1,7 @@
 import { formatRelative } from 'date-fns';
 
-export function RelativeDate({ date }: { date: string }) {
-  return formatRelative(new Date(date), new Date());
+export function RelativeDate({ date }: { date?: string }) {
+  const now = new Date();
+  const yesterday =  new Date(Date.now() - 86400000);
+  return formatRelative(yesterday, now);
 }

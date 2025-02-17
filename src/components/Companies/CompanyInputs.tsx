@@ -48,7 +48,7 @@ export const CompanyInputs = () => {
         <Stack gap={4} flex={1}>
           <CompanyAddressInputs />
           <CompanyAdditionalInformationInputs />
-          <CompanyAccountManagerInput />
+
         </Stack>
       </Stack>
     </Stack>

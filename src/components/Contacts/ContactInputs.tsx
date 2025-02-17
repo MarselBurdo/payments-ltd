@@ -194,21 +194,21 @@ const ContactMiscInputs = () => {
         helperText={false}
       />
       <BooleanInput source="has_newsletter" helperText={false} />
-      <ReferenceInput
-        reference="sales"
-        source="sales_id"
-        sort={{ field: 'last_name', order: 'ASC' }}
-        filter={{
-          'disabled@neq': true,
-        }}
-      >
-        <SelectInput
-          helperText={false}
-          label="Account manager"
-          optionText={saleOptionRenderer}
-          validate={required()}
-        />
-      </ReferenceInput>
+      {/*<ReferenceInput*/}
+      {/*  reference="sales"*/}
+      {/*  source="sales_id"*/}
+      {/*  sort={{ field: 'last_name', order: 'ASC' }}*/}
+      {/*  filter={{*/}
+      {/*    'disabled@neq': true,*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  <SelectInput*/}
+      {/*    helperText={false}*/}
+      {/*    label="Account manager"*/}
+      {/*    optionText={saleOptionRenderer}*/}
+      {/*    validate={required()}*/}
+      {/*  />*/}
+      {/*</ReferenceInput>*/}
     </Stack>
   );
 };

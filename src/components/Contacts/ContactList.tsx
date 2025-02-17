@@ -7,7 +7,6 @@ import {
   BulkDeleteButton,
   BulkExportButton,
   CreateButton,
-  ExportButton,
   ListBase,
   ListToolbar,
   Pagination,
@@ -22,7 +21,6 @@ import {
 import { Company, Contact, Sale, Tag } from '@/types';
 
 import { ContactEmpty } from './ContactEmpty';
-import { ContactImportButton } from './ContactImportButton';
 import { ContactListContent } from './ContactListContent';
 import { ContactListFilter } from './ContactListFilter';
 
@@ -74,8 +72,8 @@ const ContactListLayout = () => {
 const ContactListActions = () => (
   <TopToolbar>
     <SortButton fields={['last_name', 'first_name', 'last_seen']} />
-    <ContactImportButton />
-    <ExportButton />
+    {/*<ContactImportButton />*/}
+    {/*<ExportButton />*/}
     <CreateButton
       variant="contained"
       label="New Contact"
