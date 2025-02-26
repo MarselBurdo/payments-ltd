@@ -14,7 +14,7 @@ const MainApp = () => {
   return (
       <Admin
           dataProvider={dataProvider}
-          i18nProvider={i18nProvider}
+          // i18nProvider={i18nProvider}
           authProvider={authProvider}
           getPermissions={authProvider.getPermissions}
           layout={Layout}
