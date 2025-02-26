@@ -14,7 +14,7 @@ const generateName=()=>{
   return faker.lorem.words()
 }
 
-const paymentWithName= Array.from({length:200},()=>generateName())
+const paymentWithName= Array.from({length:70},()=>generateName())
 
 export const generatePayments = (db: Db): Payment[] => {
   const payments = paymentWithName.map((name,id) => {
