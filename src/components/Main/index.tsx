@@ -1,13 +1,13 @@
 import { Admin, Resource } from 'react-admin';
 
-import { i18nProvider } from '@/118n';
+
 import companies from '@/components/Companies';
 import contacts from '@/components/Contacts';
 import Layout from '@/components/Layout/Layout';
 import payments from '@/components/Payments';
 import { authProvider } from '@/utils/authProvider';
 import { dataProvider } from '@/utils/fakerest';
-import {useEffect} from "react";
+
 import '../../styles/globals.css'
 
 const MainApp = () => {
